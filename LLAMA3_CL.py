@@ -17,6 +17,7 @@ def get_model():
     model = AutoModelForCausalLM.from_pretrained("deepseek-ai/DeepSeek-V2-Chat",#"meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
                                                  device_map='auto',
+                                                 trust_remote_code=True,
                                                  quantization_config=bnb_config)
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
@@ -32,6 +33,7 @@ def get_model():
         model.is_parallelizable = True
         model.model_parallel = True
     tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/DeepSeek-V2-Chat",#"meta-llama/Meta-Llama-3-8B-instruct",
+                                              trust_remote_code=True,
                                               token='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')
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"

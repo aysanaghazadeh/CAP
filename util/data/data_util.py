@@ -173,6 +173,7 @@ def get_train_LLAMA3_instruct_Dataloader(args):
 def get_LLAMA3_CPO_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/DeepSeek-V2-Chat",#"meta-llama/Meta-Llama-3-8B-instruct",
                                               token='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',
+                                              trust_remote_code=True,
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
     if tokenizer.chat_template is None:
