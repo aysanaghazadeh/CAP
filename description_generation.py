@@ -12,6 +12,7 @@ from LLMs.LLM import LLM
 from VLMs.InternVL2 import InternVL
 from VLMs.LLAVA16 import LLAVA16
 from VLMs.RLHFV import RLHFV
+from VLMs.QWenVL import QWenVL
 
 
 def get_model(args):
@@ -31,6 +32,8 @@ def get_model(args):
         pipe = LLAVA16(args)
     elif args.VLM == 'RLHFV':
         pipe = RLHFV(args)
+    elif args.VLM == 'QWenVL':
+        pipe = QWenVL(args)
     return pipe
 
 
