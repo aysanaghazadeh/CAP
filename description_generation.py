@@ -54,7 +54,7 @@ def get_single_description(args, image_url, pipe):
     print(outputs)
     if args.VLM == 'InternVL' or args.VLM == 'LLAVA16' or args.VLM == 'RLHFV':
         description = outputs
-    elif args.VLM == 'QWenVl':
+    elif args.VLM == 'QWenVL':
         description = outputs[0]
     else:
         description = outputs[0]['generated_text'].split('ASSISTANT: ')[-1]
