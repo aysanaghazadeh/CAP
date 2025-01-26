@@ -11,6 +11,7 @@ from util.prompt_engineering.prompt_generation import PromptGenerator
 from LLMs.LLM import LLM
 from VLMs.InternVL2 import InternVL
 from VLMs.LLAVA16 import LLAVA16
+from VLMs.RLHFV import RLHFV
 
 
 def get_model(args):
@@ -28,6 +29,8 @@ def get_model(args):
         pipe = InternVL(args)
     elif args.VLM == 'LLAVA16':
         pipe = LLAVA16(args)
+    elif args.VLM == 'RLHFV':
+        pipe = RLHFV(args)
     return pipe
 
 
@@ -38,14 +41,14 @@ def get_llm(args):
 
 
 def get_single_description(args, image_url, pipe):
-    # image = Image.open(os.path.join(args.data_path, args.test_set_images, image_url))
-    image = Image.open(f'../Data/PittAd/train_images_all/{image_url}')
+    image = Image.open(os.path.join(args.data_path, args.test_set_images, image_url))
+    # image = Image.open(f'../Data/PittAd/train_images_all/{image_url}')
     env = Environment(loader=FileSystemLoader(args.prompt_path))
     template = env.get_template(args.VLM_prompt)
     prompt = template.render()
     outputs = pipe(image, prompt=prompt, generate_kwargs={"max_new_tokens": 250})
     print(outputs)
-    if args.VLM == 'InternVL' or args.VLM == 'LLAVA16':
+    if args.VLM == 'InternVL' or args.VLM == 'LLAVA16' or args.VLM == 'RLHFV':
         description = outputs
     else:
         description = outputs[0]['generated_text'].split('ASSISTANT: ')[-1]
@@ -79,21 +82,8 @@ def get_descriptions(args):
     else:
         # images = get_train_data(args)['ID'].values
         # images = list(json.load(open(os.path.join(args.data_path, args.test_set_QA))).keys())
-        # images = pd.read_csv(os.path.join(args.result_path, args.test_set_QA)).image_url.values
-        images = [
-            "1/11971.jpg",
-            "10/175925.png",
-            "5/23455.jpg",
-            "1/46871.jpg",
-            "0/164720.jpg",
-            "0/159000.jpg",
-            "0/90820.jpg",
-            "2/10062.jpg",
-            "2/116492.jpg",
-            "3/79633.jpg",
-            "4/63754.jpg",
-            "10/171917.png"
-        ]
+        images = pd.read_csv(os.path.join(args.result_path, args.test_set_QA)).image_url.values
+
 
     print(f'number of images in the set: {len(images)}')
     print('*' * 100)
@@ -107,8 +97,8 @@ def get_descriptions(args):
                                     f'_{args.VLM}'
                                     f'_{args.test_set_QA.replace(".csv", "")}'
                                     f'_description_single_paragraph_full_description.csv')
-    description_file = os.path.join(args.result_path,
-                                    'real_ads_human_annotation_description_not_text.csv')
+    # description_file = os.path.join(args.result_path,
+    #                                 'real_ads_human_annotation_description_not_text.csv')
     if os.path.exists(description_file):
         print(description_file)
         return pd.read_csv(description_file)
