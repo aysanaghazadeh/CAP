@@ -16,7 +16,7 @@ def get_model():
     )
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-7B-Instruct-1M",#"meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
-                                                 device_map='auto',
+                                                 # device_map='auto',
                                                  trust_remote_code=True,
                                                  quantization_config=bnb_config)
     model.gradient_checkpointing_enable()
@@ -42,7 +42,7 @@ def get_model():
 
 def get_training_args(args):
     training_args = CPOConfig(
-        output_dir=args.model_path+'/my_deepseek_CPO',
+        output_dir=args.model_path+'/my_QWenLM_CPO',
         remove_unused_columns=False,
         per_device_train_batch_size=args.batch_size,
         gradient_checkpointing=True,
@@ -55,6 +55,7 @@ def get_training_args(args):
         save_steps=50,
         evaluation_strategy="steps",
         eval_steps=10,
+        max_length=20,
         do_eval=True,
         label_names=["input_ids", "labels", "attention_mask"],
         report_to="none",
@@ -70,7 +71,7 @@ if __name__ == '__main__':
     cpo_args = get_training_args(args)
     model, tokenizer = get_model()
     cpo_config = CPOConfig(beta=0.1,
-                           output_dir=args.model_path+'/my_deepseek_CPO',)
+                           output_dir=args.model_path+'/my_QWenLM_CPO',)
     train_dataset = get_train_LLAMA3_CPO_Dataloader(args)
     tmp = train_dataset.train_test_split(test_size=0.1)
     train_dataset = tmp["train"]
