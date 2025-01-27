@@ -44,9 +44,9 @@ def get_llm(args):
 
 
 def get_single_description(args, image_url, pipe):
-    # image = Image.open(os.path.join(args.data_path, args.test_set_images, image_url))
+    image = Image.open(os.path.join(args.data_path, args.test_set_images, image_url))
     # image = Image.open(f'../Data/PittAd/train_images_all/{image_url}')
-    image = os.path.join(args.data_path, args.test_set_images, image_url)
+    # image = os.path.join(args.data_path, args.test_set_images, image_url)
     env = Environment(loader=FileSystemLoader(args.prompt_path))
     template = env.get_template(args.VLM_prompt)
     prompt = template.render()
