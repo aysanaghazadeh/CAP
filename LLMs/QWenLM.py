@@ -1,4 +1,6 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from torch import nn
+
 
 class QWenLM(nn.Module):
     def __init__(self, args):
