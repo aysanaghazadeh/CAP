@@ -111,6 +111,8 @@ def generate_images(args):
     print(f'experiment started at {experiment_datetime}')
     test_set_image_url = list(test_set['ID'].values)
     test_set_image_url = test_set_image_url[:1340]
+    if args.text_input_type == 'original_description':
+        test_set_image_url = pd.read_csv(args.description_file).ID.values
     for filename, content in QA.items():
         # if filename in seen_files:
         #     continue
