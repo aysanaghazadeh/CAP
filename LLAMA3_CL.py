@@ -7,7 +7,7 @@ from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_tr
 from trl import CPOConfig, CPOTrainer, ModelConfig, get_peft_config
 import os
 import transformers
-print(transformers.__version__)
+
 def get_model():
     bnb_config = BitsAndBytesConfig(
         load_in_8bit=True,
@@ -18,7 +18,7 @@ def get_model():
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
-                                                 # device_map='auto',
+                                                 device_map='auto',
                                                  trust_remote_code=True,
                                                  quantization_config=bnb_config)
     model.gradient_checkpointing_enable()
