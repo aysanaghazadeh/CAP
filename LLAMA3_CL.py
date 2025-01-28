@@ -14,9 +14,10 @@ def get_model():
         # bnb_4bit_use_double_quant=True,
         bnb_8bit_compute_dtype=torch.bfloat16
     )
-    model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-7B-Instruct-1M",#"meta-llama/Meta-Llama-3-8B-instruct",
+    model = AutoModelForCausalLM.from_pretrained(#"Qwen/Qwen2.5-7B-Instruct-1M",
+                                                 "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
-                                                 # device_map='auto',
+                                                 device_map='auto',
                                                  trust_remote_code=True,
                                                  quantization_config=bnb_config)
     model.gradient_checkpointing_enable()
@@ -32,7 +33,8 @@ def get_model():
         print(f'torch cuda count: {torch.cuda.device_count()}')
         model.is_parallelizable = True
         model.model_parallel = True
-    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct-1M",#"meta-llama/Meta-Llama-3-8B-instruct",
+    tokenizer = AutoTokenizer.from_pretrained(#"Qwen/Qwen2.5-7B-Instruct-1M",
+                                              "meta-llama/Meta-Llama-3-8B-instruct",
                                               trust_remote_code=True,
                                               token='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')
     tokenizer.pad_token = tokenizer.eos_token
