@@ -60,7 +60,7 @@ def get_LLAMA3_training_data(args, image_urls):
 
         prompt = f"""Describe an advertisement image that conveys the following messages in detail:
                     {action_reason}
-                    
+
                     {format}
                     Description of the image: {data_point['description']}
                 """
@@ -114,8 +114,8 @@ def get_LLAMA3_instruct_training_data(args, image_urls):
                         """
         data_point['prompt'] = [{'content': prompt,
                                  'role': 'user'},
-                                {'content':  data_point['description'],
-                                'role': 'assistant'}]
+                                {'content': data_point['description'],
+                                 'role': 'assistant'}]
         data_point["prompt"] = tokenizer.apply_chat_template(data_point["prompt"], tokenize=False)
         tokens = tokenizer(data_point["prompt"],
                            truncation=True,
@@ -171,10 +171,8 @@ def get_train_LLAMA3_instruct_Dataloader(args):
 
 
 def get_LLAMA3_CPO_training_data(args, image_urls):
-    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
-                                              #"meta-llama/Meta-Llama-3-8B-instruct",
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
                                               token='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',
-                                              trust_remote_code=True,
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
     if tokenizer.chat_template is None:
@@ -191,7 +189,7 @@ def get_LLAMA3_CPO_training_data(args, image_urls):
     negative_QAs = {}
     negative_QAs['reason'] = json.load(
         open(os.path.join(args.data_path, 'train/reason_hard_QA_Combined_Action_Reason_train.json')))
-    negative_QAs['action']= json.load(
+    negative_QAs['action'] = json.load(
         open(os.path.join(args.data_path, 'train/action_hard_QA_Combined_Action_Reason_train.json')))
     negative_QAs['adjective'] = json.load(
         open(os.path.join(args.data_path, 'train/adjective_hard_QA_Combined_Action_Reason_train.json')))
@@ -207,7 +205,8 @@ def get_LLAMA3_CPO_training_data(args, image_urls):
             for AR in QA[0]:
                 for negative_type in negative_QAs:
                     for negative_option in negative_QAs[negative_type][image_url][1]:
-                        if (negative_option in negative_QAs[negative_type][image_url][0]) or (negative_option in dataset['rejected']):
+                        if (negative_option in negative_QAs[negative_type][image_url][0]) or (
+                                negative_option in dataset['rejected']):
                             continue
                         chosen = [{'content': prompt, 'role': 'user'},
                                   {'content': AR, 'role': 'assistant'}]
@@ -232,8 +231,9 @@ def get_train_LLAMA3_CPO_Dataloader(args):
     dataset = get_LLAMA3_CPO_training_data(args, image_urls)
     return dataset
 
+
 def get_LLAMA3_RLHF_training_data(args, image_urls):
-    tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/DeepSeek-V2-Chat",#"meta-llama/Meta-Llama-3-8B",
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B",
                                               token='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',
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
@@ -296,7 +296,7 @@ def get_RLHF_train_LLAMA3_Dataloader(args):
 
 def get_LLAMA3_RLAIF_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained(
-        'meta-llama/Meta-Llama-3-8B-Instruct',
+        os.path.join(args.model_path, 'my_LLAMA3_large_sample_model/checkpoint-4350/'),
         token='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',
         padding='max_length',
         max_length=512)
@@ -307,13 +307,9 @@ def get_LLAMA3_RLAIF_training_data(args, image_urls):
                     {data_point['action_reason']}
                     Description of the image:
                 """
-        messages = [
-            {"role": "system", "content": "Be a helpful assistant"},
-            {"role": "user", "content": prompt},
-        ]
         data_point['query'] = {'query': prompt, 'action_reason': '\n'.join(data_point['action_reason'])}
         tokens = tokenizer.encode(prompt, padding='max_length', max_length=512)
-        data_point["input_ids"] = tokens
+        # data_point["input_ids"] = tokens
         return data_point
 
     QAs = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
@@ -355,10 +351,14 @@ def get_LLAMA3_DPO_training_data(args, image_urls):
         return data_point
 
     QAs = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
-    PA_train_1 = json.load(open(os.path.join(args.results, 'results', 'llama3_FT_generated_description_train_set_persuasiveness_alignment.json_SDXL_train_images_20240615_143729_persuasiveness_alignment.json')))
-    PA_train_2 = json.load(open(os.path.join(args.results, 'results', 'llama3_FT_generated_description_new_train_set_persuasiveness_alignment.json_SDXL_train_images_20240617_074807_persuasiveness_alignment.json')))
-    llama_descriptions_1 = pd.read_csv(os.path.join(args.data_path, 'train/llama3_FT_generated_description_new_train_set.csv'))
-    llama_descriptions_2 = pd.read_csv(os.path.join(args.data_path, 'train/llama3_FT_generated_description_train_set.csv'))
+    PA_train_1 = json.load(open(os.path.join(args.results, 'results',
+                                             'llama3_FT_generated_description_train_set_persuasiveness_alignment.json_SDXL_train_images_20240615_143729_persuasiveness_alignment.json')))
+    PA_train_2 = json.load(open(os.path.join(args.results, 'results',
+                                             'llama3_FT_generated_description_new_train_set_persuasiveness_alignment.json_SDXL_train_images_20240617_074807_persuasiveness_alignment.json')))
+    llama_descriptions_1 = pd.read_csv(
+        os.path.join(args.data_path, 'train/llama3_FT_generated_description_new_train_set.csv'))
+    llama_descriptions_2 = pd.read_csv(
+        os.path.join(args.data_path, 'train/llama3_FT_generated_description_train_set.csv'))
     dataset = {'prompt': [], 'chosen': [], 'rejected': []}
     for image_url in image_urls:
         QA = str(QAs[image_url][0])
