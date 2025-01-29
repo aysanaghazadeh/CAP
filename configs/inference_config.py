@@ -141,6 +141,10 @@ def parse_args():
                         type=bool,
                         default=False,
                         help='True if you want to use the fine-tuned model')
+    parser.add_argument('--api_key',
+                        type=str,
+                        default=None,
+                        help='api key for openai')
     return parser.parse_args()
 
 
