@@ -141,5 +141,6 @@ def generate_images(args):
 
 
 if __name__ == '__main__':
+    print('hello')
     args = get_args()
     generate_images(args)
