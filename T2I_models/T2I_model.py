@@ -3,7 +3,7 @@ from T2I_models.PitxArt import PixArt
 from T2I_models.SDXLFlash import SDXL
 from T2I_models.DMD2 import DMD
 from T2I_models.AuraFlow import AuraFlow
-
+from T2I_models.DALLE3 import DALLE3
 
 class T2IModel(nn.Module):
     def __init__(self, args):
@@ -12,7 +12,8 @@ class T2IModel(nn.Module):
             'PixArt': PixArt,
             'SDXL': SDXL,
             'DMD': DMD,
-            'AuraFlow': AuraFlow
+            'AuraFlow': AuraFlow,
+            'DALLE3': DALLE3
         }
         self.model = model_map[args.T2I_model](args)
 
