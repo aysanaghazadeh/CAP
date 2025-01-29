@@ -1,1 +1,1 @@
-python evaluate.py --config_type=DEFAULT --evaluation_type=llm_multi_question_persuasiveness_ranking --result_file=AR_SDXL_20241012_005132.csv  --VLM=InternVL --LLM=LLAMA3_instruct
+python evaluate.py --config_type=DEFAULT --evaluation_type=llm_multi_question_persuasiveness_ranking --result_file=LLAMA3Instruct_descriptions_AuraFlow_20240817_185858.csv  --VLM=InternVL --LLM=LLAMA3_instruct --description_file=../experiments/results/IN_QWenVL_LLAMA3Instruct_descriptions_AuraFlow_20240817_185858_description_single_paragraph_full_description.csv

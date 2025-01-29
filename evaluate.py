@@ -114,19 +114,21 @@ class Evaluation:
     @staticmethod
     def evaluate_llm_multi_question_persuasiveness_ranking(args):
         score_metrics = Metrics(args)
-        # saving_path = os.path.join(args.result_path, f'{args.result_file.replace(".csv", "")}_persuasion_creativity.json')
-        saving_path = os.path.join(args.result_path, 'real_human_eval_persuasion_creativity.json')
+        saving_path = os.path.join(args.result_path, f'{args.result_file.replace(".csv", "")}_persuasion_creativity.json')
+        # saving_path = os.path.join(args.result_path, 'real_human_eval_persuasion_creativity.json')
         print(saving_path)
         print(args.result_path)
         print(args.result_file)
-        results2 = pd.read_csv(os.path.join(args.result_path,
-                                            'real_ads_human_annotation_description_not_text.csv'))
-        results1 = pd.read_csv(os.path.join(args.result_path,
-                                            'real_ads_human_annotation_description_not_text.csv'))
-        descriptions2 = pd.read_csv(os.path.join(args.result_path,
-                                                 'real_ads_human_annotation_description_not_text.csv'))
-        descriptions1 = pd.read_csv(os.path.join(args.result_path,
-                                                 'real_ads_human_annotation_description_not_text.csv'))
+        # results2 = pd.read_csv(os.path.join(args.result_path,
+        #                                     'real_ads_human_annotation_description_not_text.csv'))
+        # results1 = pd.read_csv(os.path.join(args.result_path,
+        #                                     'real_ads_human_annotation_description_not_text.csv'))
+        # descriptions2 = pd.read_csv(os.path.join(args.result_path,
+        #                                          'real_ads_human_annotation_description_not_text.csv'))
+        # descriptions1 = pd.read_csv(os.path.join(args.result_path,
+        #                                          'real_ads_human_annotation_description_not_text.csv'))
+        descriptions2 = pd.read_csv(args.description_file)
+        descriptions1 = pd.read_csv(args.description_file)
         persuasiveness_scores = {}
         for row in descriptions1.values:
             image_url = row[0]
