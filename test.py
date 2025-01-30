@@ -60,7 +60,7 @@ alignment_file = json.load(open(f'../experiments/results/{file_a}'))
 PA_scores = {}
 
 for image_url in alignment_file:
-    if image_url not in p_star:
+    if image_url not in p_star_file:
         continue
     p_star = p_star_file[image_url]
     alignment_score = sum(alignment_file[image_url][3])/len(alignment_file[image_url][3])
