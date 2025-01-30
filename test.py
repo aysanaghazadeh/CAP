@@ -17,7 +17,7 @@ for image_url in alignment:
     similarity_score = 0
     similarity_scores_action = []
     similarity_scores_reason = []
-    action_reasons = action_reason_file[image_url]
+    action_reasons = action_reason_file[image_url][0]
     generated_image_message = alignment[image_url][0].lower
     for action_reason in action_reasons:
         print(action_reason)
