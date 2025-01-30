@@ -600,6 +600,8 @@ class Evaluation:
         action_reason_file = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
         for row in range(len(results.values)):
             image_url = results.image_url.values[row]
+            if image_url not in image_text_alignment_scores:
+                continue
             action_reasons = action_reason_file[image_url][0]
             print(f'image url: {image_url}')
             # if image_url not in baseline_results.image_url.values:
