@@ -49,6 +49,6 @@ for image_url in alignment:
 score = 0
 count = 0
 for image_url in alignment_score:
-    score += alignment_score[image_url][2]
+    score += alignment_score[image_url][1]
     count += 1
 print(f'average score: {score/count}')
