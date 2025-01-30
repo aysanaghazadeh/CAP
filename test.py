@@ -52,9 +52,9 @@ import json
 #     score += alignment_score[image_url][1]
 #     count += 1
 # print(f'average score: {score/count}')
-file_p = 'IN_QWenVL_AR_AuraFlow_20240816_214421_description_single_paragraph_full_description_persuasion_creativity.json'
+file_p = 'IN_QWenVL_AR_SDXL_20240613_204248_description_single_paragraph_full_description_persuasion_creativity.json'
 p_star_file = json.load(open(f'../experiments/results/{file_p}'))
-file_a = 'new_IN_QWenVL_AR_AuraFlow_20240816_214421_description_single_paragraph_full_descriptionVILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'
+file_a = 'file	new_IN_QWenVL_AR_SDXL_20240613_204248_description_single_paragraph_full_descriptionVILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'
 alignment_file = json.load(open(f'../experiments/results/{file_a}'))
 
 PA_scores = {}
