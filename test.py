@@ -61,7 +61,7 @@ PA_scores = {}
 
 for image_url in alignment_file:
     p_star = p_star_file[image_url]
-    alignment_score = alignment_file[image_url][1]
+    alignment_score = sum(alignment_file[image_url][3])/len(alignment_file[image_url][3])
     score = 0
     count = 0
     for i, value in enumerate(p_star):
