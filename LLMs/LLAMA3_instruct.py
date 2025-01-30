@@ -35,7 +35,7 @@ class LLAMA3Instruct(nn.Module):
                 self.pipeline = pipeline(
                     "text-generation",
                     model=model_id,
-                    token='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',
+                    token='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',
                     model_kwargs={"torch_dtype": torch.bfloat16},
                     device_map="auto",
                 )
