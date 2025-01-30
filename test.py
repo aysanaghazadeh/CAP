@@ -54,7 +54,7 @@ import json
 # print(f'average score: {score/count}')
 file_p = 'IN_QWenVL_LLAMA3Instruct_descriptions_AuraFlow_20240817_185858_description_single_paragraph_full_description_persuasion_creativity.json'
 p_star_file = json.load(open(f'../experiments/results/{file_p}'))
-file_a = 'new_IN_QWenVL_LLAMA3Instruct_descriptions_AuraFlow_20240817_185858_description_single_paragraph_full_description_persuasion_creativityLLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'
+file_a = '	new_IN_QWenVL_LLAMA3Instruct_descriptions_AuraFlow_20240817_185858_description_single_paragraph_full_descriptionLLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'
 alignment_file = json.load(open(f'../experiments/results/{file_a}'))
 
 PA_scores = {}
