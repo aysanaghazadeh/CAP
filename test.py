@@ -45,3 +45,10 @@ for image_url in alignment:
                                    similarity_scores_reason]
     with open(f'../experiments/results/new_{alignment_file}', "w") as outfile:
         json.dump(alignment_score, outfile)
+
+score = 0
+count = 0
+for image_url in alignment_score:
+    score += alignment_score[image_url][2]
+    count += 1
+print(f'average score: {score/count}')
