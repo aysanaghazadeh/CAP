@@ -120,25 +120,25 @@ def generate_images(args):
         # if filename not in test_set:
             continue
         # topics = test_set.loc[test_set['ID'] == filename]['topic'].values
-        try:
-            topics = []
-            action_reasons = content[0]
-            # action_reasons = []
-            # for AR in content[1]:
-            #     if AR not in content[0]:
-            #         action_reasons.append(AR)
-            #         break
-            image, prompt = AdImageGeneration(filename)
-            save_image(args, filename, image, experiment_datetime)
-            scores = evaluate(metrics, args, action_reasons, filename, experiment_datetime)
-            save_results(args, prompt, action_reasons, filename, experiment_datetime, list(scores.values()), topics)
-            print(f'image url: {filename}')
-            print(f'topics: {topics}')
-            print(f'action-reason statements: {process_action_reason(action_reasons)}')
-            print(f'scores: {scores}')
-            print('-' * 20)
-        except:
-            continue
+        # try:
+        topics = []
+        action_reasons = content[0]
+        # action_reasons = []
+        # for AR in content[1]:
+        #     if AR not in content[0]:
+        #         action_reasons.append(AR)
+        #         break
+        image, prompt = AdImageGeneration(filename)
+        save_image(args, filename, image, experiment_datetime)
+        scores = evaluate(metrics, args, action_reasons, filename, experiment_datetime)
+        save_results(args, prompt, action_reasons, filename, experiment_datetime, list(scores.values()), topics)
+        print(f'image url: {filename}')
+        print(f'topics: {topics}')
+        print(f'action-reason statements: {process_action_reason(action_reasons)}')
+        print(f'scores: {scores}')
+        print('-' * 20)
+        # except:
+        #     continue
     finish_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
     print(f'experiment ended at {finish_datetime}')
 
