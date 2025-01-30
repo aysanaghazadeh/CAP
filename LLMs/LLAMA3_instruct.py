@@ -15,9 +15,9 @@ class LLAMA3Instruct(nn.Module):
                 bnb_8bit_compute_dtype=torch.float16
             )
             if args.fine_tuned:
-                self.model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
-                                                             token='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',
-                                                             device_map='auto')
+                # self.model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
+                #                                              token='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',
+                #                                              device_map='auto')
                 self.tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
                                                           token='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')
                 self.tokenizer.pad_token = self.tokenizer.eos_token
