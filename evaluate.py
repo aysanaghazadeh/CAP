@@ -586,6 +586,7 @@ class Evaluation:
             return objects
 
         metrics = Metrics(args)
+        print_list = []
         results = pd.read_csv(os.path.join(args.result_path, args.result_file))
         baseline_result_file = 'AR_SDXL_20240613_204248.csv'
         baseline_results = pd.read_csv(os.path.join(args.result_path, baseline_result_file))
@@ -600,7 +601,7 @@ class Evaluation:
         for row in range(len(results.values)):
             image_url = results.image_url.values[row]
             action_reasons = action_reason_file[image_url][0]
-            # print(f'image url: {image_url}')
+            print(f'image url: {image_url}')
             # if image_url not in baseline_results.image_url.values:
             #     continue
             no_product_image_count = 0
@@ -614,14 +615,15 @@ class Evaluation:
                 generated_image_path=generated_image_path,
                 objects=get_objects(action_reasons),
                 args=args)
-            # print(
-            #     f'creativity score for image {image_url} is {creativity_scores[image_url]}')
+            print(
+                f'creativity score for image {image_url} is {creativity_scores[image_url]}')
             if image_url in ['5/102155.jpg', '9/76489.jpg', '5/6125.jpg', '1/29981.jpg']:
-                print(f'objects for {image_url} are {get_objects(action_reasons)}')
+                print_list.append(f'objects for {image_url} are {get_objects(action_reasons)}')
             with open(saving_path, "w") as outfile:
                 json.dump(creativity_scores, outfile)
-        print(f'number of images with no product image is: {no_product_image_count}')
 
+        print(f'number of images with no product image is: {no_product_image_count}')
+        print('\n - '.join(print_list))
     def evaluate_action_reason_VLM(self, args):
         results = {'acc@1': 0, 'acc@2': 0, 'acc@3': 0,
                    'p@1': 0, 'p@2': 0, 'p@3': 0}
