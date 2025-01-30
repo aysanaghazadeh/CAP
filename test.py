@@ -18,15 +18,15 @@ for image_url in alignment:
     similarity_scores_action = []
     similarity_scores_reason = []
     action_reasons = action_reason_file[image_url][0]
-    generated_image_message = alignment[image_url][0].lower
+    generated_image_message = alignment[image_url][0].lower()
     for action_reason in action_reasons:
         print(action_reason)
         action_reason = action_reason.lower()
 
         similarity_score_action = model.compute_score([action_reason.split('because')[0],
-                                                            generated_image_message.split('because')[0]],
-                                                           max_passage_length=128,
-                                                           weights_for_different_modes=[0.4, 0.2, 0.4])[
+                                                       generated_image_message.split('because')[0]],
+                                                       max_passage_length=128,
+                                                       weights_for_different_modes=[0.4, 0.2, 0.4])[
             'colbert+sparse+dense']
         similarity_score_reason = model.compute_score([action_reason.split('because')[-1],
                                                             generated_image_message.split('because')[-1]],
