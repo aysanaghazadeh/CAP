@@ -66,7 +66,7 @@ for image_url in alignment_file:
     count = 0
     for i, value in enumerate(p_star):
         if i not in [3, 6]:
-            score += value
+            score += value/5
             count += 1
         score += alignment_score
         count += 1
