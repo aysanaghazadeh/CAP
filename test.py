@@ -62,6 +62,11 @@ PA_scores = {}
 for image_url in alignment_file:
     if image_url not in p_star_file:
         continue
+    if alignment_file[image_url][0] == 0:
+        PA_scores[image_url] = 0
+        with open(f'../experiments/results/new_{file_p}', "w") as outfile:
+            json.dump(PA_scores, outfile)
+        continue
     p_star = p_star_file[image_url]
     alignment_score = sum(alignment_file[image_url][3])/len(alignment_file[image_url][3])
     score = 0
