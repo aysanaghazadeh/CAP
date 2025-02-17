@@ -1,14 +1,12 @@
-import torch
 from diffusers import FluxPipeline
 import torch
 from torch import nn
-from diffusers import AuraFlowPipeline
 from transformers import BitsAndBytesConfig
 
 
-class AuraFlow(nn.Module):
+class Flux(nn.Module):
     def __init__(self, args):
-        super(AuraFlow, self).__init__()
+        super(Flux, self).__init__()
         self.device = args.device
         quantization_config = BitsAndBytesConfig(
             load_in_8bit=True,
