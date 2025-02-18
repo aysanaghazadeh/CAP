@@ -19,7 +19,7 @@ def get_model():
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
                                                  quantization_config=bnb_config,
-                                                 device_map='auto')
+                                                 device_map={"": torch.cuda.current_device()})
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
     peft_config = LoraConfig(inference_mode=False,
