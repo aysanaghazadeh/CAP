@@ -19,7 +19,7 @@ def get_model():
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
                                                  trust_remote_code=True,
-                                                 load_in_8bit=True).to(device=args.device)
+                                                 load_in_8bit=True)
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
     peft_config = LoraConfig(inference_mode=False,
