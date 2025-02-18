@@ -84,7 +84,7 @@ if __name__ == '__main__':
         args=cpo_args,
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
     )
 
     # train and save the model
