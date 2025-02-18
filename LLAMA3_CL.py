@@ -18,8 +18,7 @@ def get_model():
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
-                                                 quantization_config=bnb_config,
-                                                 device_map={"": torch.cuda.current_device()})
+                                                 quantization_config=bnb_config)
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
     peft_config = LoraConfig(inference_mode=False,
@@ -27,7 +26,7 @@ def get_model():
                              lora_alpha=32,
                              lora_dropout=0.1,
                              peft_type=TaskType.CAUSAL_LM)
-    model = get_peft_model(model, peft_config)
+    model = get_peft_model(model, peft_config).to(device=args.device)
     print(f'model\'s trainable parameters: {model.print_trainable_parameters()}')
     if torch.cuda.device_count() > 1:
         print(f'torch cuda count: {torch.cuda.device_count()}')
