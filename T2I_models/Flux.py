@@ -14,6 +14,7 @@ class Flux(nn.Module):
         )
         self.pipeline = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-dev",
                                                      device_map='auto')
+        self.pipeline = self.pipeline.to(device=args.device)
 
     def forward(self, prompt):
         image = self.pipeline(prompt,
