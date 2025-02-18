@@ -13,6 +13,8 @@ class Flux(nn.Module):
             bnb_8bit_compute_dtype=torch.float16
         )
         self.pipeline = DiffusionPipeline.from_pretrained("black-forest-labs/FLUX.1-dev",
+                                                           torch_dtype=torch.float16,
+                                                           variant="fp16",
                                                           quantization_config=quantization_config)
         self.pipeline = self.pipeline.to(device=args.device)
 
