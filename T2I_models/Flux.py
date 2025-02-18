@@ -12,7 +12,8 @@ class Flux(nn.Module):
             load_in_8bit=True,
             bnb_8bit_compute_dtype=torch.float16
         )
-        self.pipeline = DiffusionPipeline.from_pretrained("black-forest-labs/FLUX.1-dev")
+        self.pipeline = DiffusionPipeline.from_pretrained("black-forest-labs/FLUX.1-dev",
+                                                          quantization_config=quantization_config)
         self.pipeline = self.pipeline.to(device=args.device)
 
     def forward(self, prompt):
