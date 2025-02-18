@@ -19,7 +19,8 @@ def get_model():
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
                                                  trust_remote_code=True,
-                                                 quantization_config=bnb_config)
+                                                 quantization_config=bnb_config,
+                                                 device_map='auto')
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
     peft_config = LoraConfig(inference_mode=False,
