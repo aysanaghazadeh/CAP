@@ -18,6 +18,5 @@ class Flux(nn.Module):
         self.pipeline = self.pipeline.to(device=args.device)
 
     def forward(self, prompt):
-        image = self.pipeline(prompt,
-                              ).images[0]
+        image = self.pipeline(prompt).images[0]
         return image

@@ -18,9 +18,8 @@ def get_model():
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
-                                                 device_map='auto',
                                                  trust_remote_code=True,
-                                                 quantization_config=bnb_config)
+                                                 quantization_config=bnb_config).to(device=args.device)
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
     peft_config = LoraConfig(inference_mode=False,
