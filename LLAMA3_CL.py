@@ -18,7 +18,6 @@ def get_model():
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
                                                  token='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',
-                                                 trust_remote_code=True,
                                                  quantization_config=bnb_config,
                                                  device_map='auto')
     model.gradient_checkpointing_enable()
@@ -36,7 +35,6 @@ def get_model():
         model.model_parallel = True
     tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
                                               # "meta-llama/Meta-Llama-3-8B-instruct",
-                                              trust_remote_code=True,
                                               token='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')
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
