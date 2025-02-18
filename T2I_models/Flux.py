@@ -18,11 +18,10 @@ class Flux(nn.Module):
 
     def forward(self, prompt):
         image = self.pipeline(prompt,
-                              height=1024,
-                              width=1024,
+                              height=512,
+                              width=512,
                               guidance_scale=3.5,
-                              num_inference_steps=50,
-                              max_sequence_length=512,
-                              generator=torch.Generator("cpu").manual_seed(0)
+                              num_inference_steps=28,
+                              max_sequence_length=512
                               ).images[0]
         return image
