@@ -125,7 +125,7 @@ def parse_args():
                         help='learning rate for training the model')
     parser.add_argument('--batch_size',
                         type=int,
-                        default=4,
+                        default=2,
                         help='batch size in the training process')
     parser.add_argument('--weight_decay',
                         type=int,
