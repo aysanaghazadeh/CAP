@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 # args.LLM = 'QWenLM'
 description = '''
- The image depicts two chickens standing on a table. The first chicken, on the left, is standing outside a basket and asks, ""IS THE ANTA'S CE IKFİNİN NO ÇİAK?"" The second chicken, on the right, responds, ""I BESIOE SNOOK IT'S THIEERS, TO CROOK!"" Below the first chicken, there is a basket with the chicken inside it. To the right of the second chicken, there is a bowl with the text ""KFC"" on it, and a pile of food is shown next to the bowl. The second chicken is looking at the bowl and says, ""I BETH LLON'T SEE AT TO because tari af indrate buddy.""
+The image features a cup with a red and white striped design and a logo of a man's face. The cup is filled with several pieces of breaded and fried chicken nuggets. Some of the nuggets are also scattered on the table around the cup. In the background, there is a small bird, possibly a rooster, flying. A red cross symbol is also present in the upper right corner of the image. The setting appears to be indoors with a blurred background.
 '''
 format = '''The interpretation format is: I ${should or shouldn't} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
