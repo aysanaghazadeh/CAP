@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 args.LLM = 'QWenLM'
 description = '''
-The image features a large cage with a chicken inside it. The chicken has a white body with a red comb and wattle. The cage is placed on a rusty metal base. To the right of the cage, there is a sign with the text ""BOYCOTT KFC"" in red letters. Next to the sign, there are four chicks standing in a row. In the foreground, a child is holding a piece of paper with text on it. The child is wearing a green shirt and blue shorts. The ground is covered
+The image features a central figure with a city skyline in the background. Below the central figure, there is a crowd of people, some of whom are holding signs. The signs have phrases such as ""VOTE MATTERS"" and ""MY MATTERS."" The people in the crowd are diverse in terms of age, gender, and ethnicity. The overall color scheme includes warm tones, with a prominent use of purple and yellow. The image appears to be a stylized illustration or digital artwork.
 '''
 format = '''The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
