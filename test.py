@@ -94,7 +94,6 @@ from LLMs.LLM import LLM
 from configs.evaluation_config import get_args
 
 args = get_args()
-args.fine_tuned = True
 args.LLM = 'QWenLM'
 description = '''
 In the image, a bottle of skincare product is placed on top of a lush green meadow. The bottle has a white pump dispenser with a gold-colored metallic cap. Written on the bottle, the text reads, ""I LOVE ELIZADEW'S BLUE-RAGE! ALOE VERA & BLUE SCARF VEGAN SKINCARE"" along with the additional statement ""ALOEGENOLIC ACID PEA PRUNE"". On the background, over the grassy area, there is a casual handwritten piece of text that appears whimsical and playful in style. The handwriting reads: ""I ŞŞWOLD BUY ELEZADETH'S LITUSE WILL RAGYULL ME LT TIA ZEMTLIL BLUE ḰLUTÞÌT MIARĀ BŽTUŸUSĀ SEĀĤLA KEMIE FEEL IT MAKŰE YOUYNG "" AGAIN"".
