@@ -6,6 +6,8 @@ import os
 class QWenLM(nn.Module):
     def __init__(self, args):
         super(QWenLM, self).__init__()
+
+        self.args = args
         model_name = "Qwen/Qwen2.5-7B-Instruct"
         if args.fine_tuned:
             self.model = AutoModelForCausalLM.from_pretrained(
