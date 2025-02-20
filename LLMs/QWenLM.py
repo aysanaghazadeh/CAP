@@ -18,7 +18,7 @@ class QWenLM(nn.Module):
             self.tokenizer.padding_side = "right"
             self.model = PeftModel.from_pretrained(self.model,
                                                    os.path.join(args.model_path,
-                                                                'my_QWenLM_CPO/checkpoint-950/'))
+                                                                'my_QWenLM_CPO/checkpoint-1400/'))
         else:
             self.model = AutoModelForCausalLM.from_pretrained(
                 model_name,
