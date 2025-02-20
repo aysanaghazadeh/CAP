@@ -102,7 +102,7 @@ format = '''The interpretation format is: I should ${action} because ${reason}. 
 prompt = f"""What is the correct interpretation for the described image:
         
              Description: {description}.
-             {format}"""
+             """
 
 pipe = LLM(args)
 print(pipe(prompt))
