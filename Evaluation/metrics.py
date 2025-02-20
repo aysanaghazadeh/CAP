@@ -298,7 +298,7 @@ class Metrics:
         if args.fine_tuned and args.LLM != 'QWenLM':
             format = ''
         else:
-            format = 'The interpretation format is: I ${should or should not} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'
+            format = 'The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'
         prompt = f"""What is the correct interpretation for the described image:
         
                      Description: {description}.
