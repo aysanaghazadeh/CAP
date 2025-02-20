@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 args.LLM = 'QWenLM'
 description = '''
-In the image, a bottle of skincare product is placed on top of a lush green meadow. The bottle has a white pump dispenser with a gold-colored metallic cap. Written on the bottle, the text reads, ""I LOVE ELIZADEW'S BLUE-RAGE! ALOE VERA & BLUE SCARF VEGAN SKINCARE"" along with the additional statement ""ALOEGENOLIC ACID PEA PRUNE"". On the background, over the grassy area, there is a casual handwritten piece of text that appears whimsical and playful in style. The handwriting reads: ""I ŞŞWOLD BUY ELEZADETH'S LITUSE WILL RAGYULL ME LT TIA ZEMTLIL BLUE ḰLUTÞÌT MIARĀ BŽTUŸUSĀ SEĀĤLA KEMIE FEEL IT MAKŰE YOUYNG "" AGAIN"".
+The image features a woman sitting outdoors with a serene landscape in the background. She is wearing a cream-colored turtleneck sweater and is holding a bottle of perfume, which is emitting a spray of fragrance. The woman is smiling and looking to her right. In front of her, there is a basket containing various flowers and a blanket spread out on the grass. The background shows a meandering stream flowing through a lush green valley with rolling hills and a clear sky. The lighting suggests it is either early morning or late afternoon, with the sun casting a warm glow over the scene.
 '''
 format = '''The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
