@@ -101,7 +101,8 @@ def get_descriptions(args):
     description_file = os.path.join(args.result_path,
                                     f'{args.description_type}'
                                     f'_{args.VLM}'
-                                    f'_{args.test_set_QA.replace(".csv", "")}'
+                                    # f'_{args.test_set_QA.replace(".csv", "")}'
+                                    f'_	AR_Flux_20250218_072555'
                                     f'_description_single_paragraph_full_description.csv')
     # description_file = os.path.join(args.result_path,
     #                                 'real_ads_human_annotation_description_not_text.csv')

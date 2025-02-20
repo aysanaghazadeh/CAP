@@ -130,12 +130,12 @@ def generate_images(args):
             #         break
             image, prompt = AdImageGeneration(filename)
             save_image(args, filename, image, experiment_datetime)
-            scores = evaluate(metrics, args, action_reasons, filename, experiment_datetime)
-            save_results(args, prompt, action_reasons, filename, experiment_datetime, list(scores.values()), topics)
+            # scores = evaluate(metrics, args, action_reasons, filename, experiment_datetime)
+            save_results(args, prompt, action_reasons, filename, experiment_datetime, [], topics)
             print(f'image url: {filename}')
             print(f'topics: {topics}')
             print(f'action-reason statements: {process_action_reason(action_reasons)}')
-            print(f'scores: {scores}')
+            # print(f'scores: {scores}')
             print('-' * 20)
         except:
             continue
