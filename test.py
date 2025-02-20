@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 args.LLM = 'QWenLM'
 description = '''
-The image features a central figure with a city skyline in the background. Below the central figure, there is a crowd of people, some of whom are holding signs. The signs have phrases such as ""VOTE MATTERS"" and ""MY MATTERS."" The people in the crowd are diverse in terms of age, gender, and ethnicity. The overall color scheme includes warm tones, with a prominent use of purple and yellow. The image appears to be a stylized illustration or digital artwork.
+The image features a group of children arranged in a circle, with their heads and shoulders visible. Each child is holding a white heart-shaped card with handwritten messages on them. The children are smiling and appear to be of various ethnicities. The background is a purple circle that frames the children. In the center of the circle, there is a large text that reads ""TAKE THE PLEDGE"" in bold, capital letters, followed by a smaller text ""Bullying is not Nice."""
 '''
 format = '''The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
