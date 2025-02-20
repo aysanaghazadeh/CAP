@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 args.LLM = 'QWenLM'
 description = '''
-The image is an advertisement featuring two prominent elements: a bottle of perfume and a young woman. On the left side of the image, a bottle of perfume named ""BUS ELABEH ARIN"" is displayed prominently. The bottle has a clear, rectangular shape with a purple label, gold accents, and a crystal stopper. To the right, the young woman is dressed in a striking blue one-shoulder dress, elegantly smiling. Next to her, bold text states her name, ""ELIZABETH ARDEN,"" followed by a series of words emphasizing her desire to re-buy the perfume, citing reasons such as being a better individual and the bluegreen color of the young you inside her. The advertisement is vibrant, with a mint green background that contrasts nicely with the blue dress, and uses a mixture of bold and lighter text to highlight key information.
+The image features a central figure with a city skyline in the background. Below the central figure, there is a crowd of people, some of whom are holding signs. The signs have phrases such as ""VOTE MATTERS"" and ""MY MATTERS."" The people in the crowd are diverse in terms of age, gender, and ethnicity. The overall color scheme includes warm tones, with a prominent use of purple and yellow. The image appears to be a stylized illustration or digital artwork."
 '''
 format = '''The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
