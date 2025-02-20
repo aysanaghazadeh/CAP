@@ -302,7 +302,7 @@ class Metrics:
         prompt = f"""What is the correct interpretation for the described image:
         
                      Description: {description}.
-                     """
+                     {format}"""
         generated_image_message = self.llm(prompt)
         generated_image_message = generated_image_message.lower()
         print(generated_image_message)
