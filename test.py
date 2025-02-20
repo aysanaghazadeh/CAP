@@ -4,7 +4,7 @@ import json
 
 model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
 action_reason_file = json.load(open('../Data/PittAd/train/QA_Combined_Action_Reason_train.json'))
-alignment_file = 'IN_InternVL_llm_prompt_with_objects_LLAMA3_instruct_FTFalse_PSA_AuraFlow_20241208_222733_description_single_paragraph_full_descriptionQWenLM_text_image_alignment_isFineTunedTrue_3000_weighted.json'
+alignment_file = 'IN_InternVL_AR_SDXL_20241012_005132_description_single_paragraph_no_textQWenLM_text_image_alignment_isFineTunedTrue_3000_weighted.json'
 alignment = json.load(open(f'../experiments/results/{alignment_file}'))
 alignment_score = {}
 for image_url in alignment:
