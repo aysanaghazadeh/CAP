@@ -94,7 +94,7 @@ from LLMs.LLM import LLM
 from configs.evaluation_config import get_args
 
 args = get_args()
-args.LLM = 'QWenLM'
+# args.LLM = 'QWenLM'
 description = '''
 The image features a group of children arranged in a circle, with their heads and shoulders visible. Each child is holding a white heart-shaped card with handwritten messages on them. The children are smiling and appear to be of various ethnicities. The background is a purple circle that frames the children. In the center of the circle, there is a large text that reads ""TAKE THE PLEDGE"" in bold, capital letters, followed by a smaller text ""Bullying is not Nice."""
 '''
@@ -102,7 +102,7 @@ format = '''The interpretation format is: I ${should or shouldn't} ${action} bec
 prompt = f"""What is the correct interpretation for the described image:
 
              Description: {description}.
-             """
+             {format}"""
 
 pipe = LLM(args)
 print(pipe(prompt))
