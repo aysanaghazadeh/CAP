@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 # args.LLM = 'QWenLM'
 description = '''
-The image shows a woman sitting on a beige couch. She is wearing a dark green dress with buttons and black high heels. Her hair is styled in an updo. To her right, there is a lamp with a beige lampshade on a wooden side table. The room has a green wall with a picture frame hanging on it. The floor is covered with a colorful rug. There is a visible smoke or steam rising from the area near the woman's feet.
+ The image shows a cozy living room with a large window that provides a view of a forested area outside. The room features two upholstered armchairs and a couch, all in a rich, orange fabric with tufted detailing. The furniture is arranged around a small wooden table with a vase of greenery on top. Two table lamps with beige lampshades and dark bases are placed on either side of the table. The floor is covered with a large, patterned rug in shades of orange and beige, with floral designs. The walls are painted in a muted green color, and there are two framed pictures hanging on the wall. The window is divided into multiple panes and is flanked by long, dark green curtains. The overall ambiance of the room is warm and inviting
 '''
 format = '''The interpretation format is: I ${should or shouldn't} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
