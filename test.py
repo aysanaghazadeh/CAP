@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 # args.LLM = 'QWenLM'
 description = '''
- The image shows a cozy living room with a large window that provides a view of a forested area outside. The room features two upholstered armchairs and a couch, all in a rich, orange fabric with tufted detailing. The furniture is arranged around a small wooden table with a vase of greenery on top. Two table lamps with beige lampshades and dark bases are placed on either side of the table. The floor is covered with a large, patterned rug in shades of orange and beige, with floral designs. The walls are painted in a muted green color, and there are two framed pictures hanging on the wall. The window is divided into multiple panes and is flanked by long, dark green curtains. The overall ambiance of the room is warm and inviting
+ The image depicts two chickens standing on a table. The first chicken, on the left, is standing outside a basket and asks, ""IS THE ANTA'S CE IKFİNİN NO ÇİAK?"" The second chicken, on the right, responds, ""I BESIOE SNOOK IT'S THIEERS, TO CROOK!"" Below the first chicken, there is a basket with the chicken inside it. To the right of the second chicken, there is a bowl with the text ""KFC"" on it, and a pile of food is shown next to the bowl. The second chicken is looking at the bowl and says, ""I BETH LLON'T SEE AT TO because tari af indrate buddy.""
 '''
 format = '''The interpretation format is: I ${should or shouldn't} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
