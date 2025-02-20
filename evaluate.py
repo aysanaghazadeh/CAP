@@ -570,6 +570,7 @@ class Evaluation:
             with open(saving_path, "w") as outfile:
                 json.dump(creativity_scores, outfile)
         print(f'number of images with no product image is: {no_product_image_count}')
+        print(f'average creativity score: {sum(creativity_scores.values)/len(list(creativity_scores.keys))}')
 
 
     def evaluate_text_based_persuasiveness_creativity(self, args):
@@ -593,6 +594,10 @@ class Evaluation:
         saving_path = os.path.join(args.result_path, args.result_file).replace('.csv',
                                                                                args.text_alignment_file.split('_')[-1].split('.')[0] +
                                                                                '_creativity.json')
+        saving_path = os.path.join(args.result_path, '.csv').replace('.csv',
+                                                                       args.text_alignment_file.split('_')[
+                                                                           -1].split('.')[0] +
+                                                                       '_creativity.json')
         # saving_path = os.path.join(args.result_path, 'real_psa_creativity.json')
         creativity_scores = {}
         image_text_alignment_scores = json.load(open(os.path.join(args.result_path,
@@ -608,10 +613,11 @@ class Evaluation:
             #     continue
             no_product_image_count = 0
             image_text_alignment_score = image_text_alignment_scores[image_url]
+            generated_image_path = os.path.join(args.result_path, args.test_set_images, image_url)
             # generated_image_path = results.generated_image_url.values[row]
-            generated_image_path = os.path.join(args.data_path,
-                                                'train_images_all',
-                                                image_url)
+            # generated_image_path = os.path.join(args.data_path,
+            #                                     'train_images_all',
+            #                                     image_url)
             creativity_scores[image_url] = metrics.get_text_based_persuasiveness_creativity_score(
                 text_alignment_score=image_text_alignment_score,
                 generated_image_path=generated_image_path,
@@ -619,8 +625,8 @@ class Evaluation:
                 args=args)
             print(
                 f'creativity score for image {image_url} is {creativity_scores[image_url]}')
-            if image_url in ['5/102155.jpg', '9/76489.jpg', '5/6125.jpg', '1/29981.jpg']:
-                print_list.append(f'objects for {image_url} are {get_objects(action_reasons)}')
+            # if image_url in ['5/102155.jpg', '9/76489.jpg', '5/6125.jpg', '1/29981.jpg']:
+            #     print_list.append(f'objects for {image_url} are {get_objects(action_reasons)}')
             with open(saving_path, "w") as outfile:
                 json.dump(creativity_scores, outfile)
 
