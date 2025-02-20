@@ -295,10 +295,10 @@ class Metrics:
         if 'yes' not in description.split('Q2:')[0].lower():
             return 0, 0, 0, 0
         description = description.split('Q2:')[-1]
-        if args.fine_tuned:
-            format = 'The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'
+        if args.fine_tuned and args.LLM != 'QWenLM':
+            format = ''
         else:
-            format = 'The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'
+            format = 'The interpretation format is: I ${should or should not} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'
         prompt = f"""What is the correct interpretation for the described image:
         
                      Description: {description}.
