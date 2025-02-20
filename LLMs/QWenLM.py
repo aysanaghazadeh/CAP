@@ -1,22 +1,35 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from torch import nn
-
+from peft import PeftModel
+import os
 
 class QWenLM(nn.Module):
     def __init__(self, args):
         super(QWenLM, self).__init__()
         model_name = "Qwen/Qwen2.5-7B-Instruct"
-
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            torch_dtype="auto",
-            device_map="auto"
-        )
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        if args.fine_tuned:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                torch_dtype="auto",
+                device_map="auto"
+            )
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+            self.tokenizer.padding_side = "right"
+            self.model = PeftModel.from_pretrained(self.model,
+                                                   os.path.join(args.model_path,
+                                                                'my_QWenLM_CPO/checkpoint-950/'))
+        else:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                torch_dtype="auto",
+                device_map="auto"
+            )
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     def forward(self, prompt):
         messages = [
-            {"role": "system", "content": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt}
         ]
         text = self.tokenizer.apply_chat_template(
@@ -28,7 +41,7 @@ class QWenLM(nn.Module):
 
         generated_ids = self.model.generate(
             **model_inputs,
-            max_new_tokens=512
+            max_new_tokens=20
         )
         generated_ids = [
             output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
