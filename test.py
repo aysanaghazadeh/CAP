@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 args.LLM = 'QWenLM'
 description = '''
-The image features a vibrant, cheerful design primarily in shades of pink, with a large ice cream cone placed at the center composed of pink, white, and black layers resembling Neapolitan ice cream. To the left of the ice cream, there is a handwritten-style caption in black that reads, ""I'm happy."" The ice cream cone is a visual pun or a clever representation of the word ""happy"" with its three colors mirroring the composition of the ice cream. The background is a solid light pink color, providing a cohesive and pleasing aesthetic that emphasizes the joyful theme conveyed by the phrase and visual elements.
+The image depicts a serene outdoor scene with a woman sitting on a blanket in a lush, green meadow. She is holding a blue perfume bottle in her hands, and her face is turned upwards with a smile. A small stream flows gently through the grassy landscape, surrounded by vibrant wildflowers. The lighting is soft and natural, creating a peaceful and idyllic atmosphere.
 '''
 format = '''The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
