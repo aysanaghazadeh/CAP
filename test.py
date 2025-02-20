@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 # args.LLM = 'QWenLM'
 description = '''
-The image features a group of children arranged in a circle, with their heads and shoulders visible. Each child is holding a white heart-shaped card with handwritten messages on them. The children are smiling and appear to be of various ethnicities. The background is a purple circle that frames the children. In the center of the circle, there is a large text that reads ""TAKE THE PLEDGE"" in bold, capital letters, followed by a smaller text ""Bullying is not Nice."""
+The image features a large cage with a chicken inside it. The chicken has a white body with a red comb and wattle. The cage is placed on a rusty metal base. To the right of the cage, there is a sign with the text ""BOYCOTT KFC"" in red letters. Next to the sign, there are four chicks standing in a row. In the foreground, a child is holding a piece of paper with text on it. The child is wearing a green shirt and blue shorts. The ground is covered
 '''
 format = '''The interpretation format is: I ${should or shouldn't} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
