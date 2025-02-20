@@ -4,13 +4,13 @@ import json
 
 model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
 action_reason_file = json.load(open('../Data/PittAd/train/QA_Combined_Action_Reason_train.json'))
-alignment_file = 'IN_InternVL_LLM_input_LLAMA3_FTFalse_Flux_20250220_012210_description_single_paragraph_full_descriptionQWenLM_text_image_alignment_isFineTunedTrue_3000_weighted.json'
+alignment_file = 'IN_InternVL_LLM_input_LLAMA3_FTFalse_Flux_20250220_012210_description_single_paragraph_full_descriptionLLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'
 alignment = json.load(open(f'../experiments/results/{alignment_file}'))
 alignment_score = {}
 for image_url in alignment:
     if alignment[image_url] == [0, 0, 0, 0]:
         alignment_score[image_url] = [0, 0, 0, 0]
-        with open(f'../experiments/results/new_{alignment_file}', "w") as outfile:
+        with open(f'../experiments/results/{alignment_file}', "w") as outfile:
             json.dump(alignment_score, outfile)
         continue
     similarity_score = 0
