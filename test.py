@@ -42,7 +42,7 @@ for image_url in alignment:
                                    similarity_score,
                                    similarity_scores_action,
                                    similarity_scores_reason]
-    with open(f'../experiments/results/new_{alignment_file}', "w") as outfile:
+    with open(f'../experiments/results/{alignment_file}', "w") as outfile:
         json.dump(alignment_score, outfile)
 
 score = 0
