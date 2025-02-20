@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 # args.LLM = 'QWenLM'
 description = '''
-The image features a large cage with a chicken inside it. The chicken has a white body with a red comb and wattle. The cage is placed on a rusty metal base. To the right of the cage, there is a sign with the text ""BOYCOTT KFC"" in red letters. Next to the sign, there are four chicks standing in a row. In the foreground, a child is holding a piece of paper with text on it. The child is wearing a green shirt and blue shorts. The ground is covered
+The image depicts a dimly lit alleyway with graffiti on the walls. A young boy is standing in the center of the alley, looking down and to his right. He is wearing a gray hoodie, dark pants, and sneakers. His expression appears to be one of sadness or distress. On the right side of the image, there is a large, bold text that reads ""STOP THE HURT"" with a smaller text below it saying ""be an Ally, not a b bystander."" The alley is illuminated by a street lamp above the boy, casting a blue light on the scene.
 '''
 format = '''The interpretation format is: I ${should or shouldn't} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
