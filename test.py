@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 # args.LLM = 'QWenLM'
 description = '''
-The image depicts a dimly lit alleyway with graffiti on the walls. A young boy is standing in the center of the alley, looking down and to his right. He is wearing a gray hoodie, dark pants, and sneakers. His expression appears to be one of sadness or distress. On the right side of the image, there is a large, bold text that reads ""STOP THE HURT"" with a smaller text below it saying ""be an Ally, not a b bystander."" The alley is illuminated by a street lamp above the boy, casting a blue light on the scene.
+ The image features a stylized illustration of a person holding an ice cream cone. The person is wearing sunglasses and a blue Hawaiian shirt with white palm tree patterns. The background includes two palm trees, a sun, and an ocean. There are also seagulls flying in the sky. The text ""HAAAGEN DAZZ"" is prominently displayed at the top of the image. The overall color scheme is vibrant, with a lot of pink, blue, and yellow tones.
 '''
 format = '''The interpretation format is: I ${should or shouldn't} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
