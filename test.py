@@ -98,9 +98,11 @@ args.LLM = 'QWenLM'
 description = '''
 In the image, a bottle of skincare product is placed on top of a lush green meadow. The bottle has a white pump dispenser with a gold-colored metallic cap. Written on the bottle, the text reads, ""I LOVE ELIZADEW'S BLUE-RAGE! ALOE VERA & BLUE SCARF VEGAN SKINCARE"" along with the additional statement ""ALOEGENOLIC ACID PEA PRUNE"". On the background, over the grassy area, there is a casual handwritten piece of text that appears whimsical and playful in style. The handwriting reads: ""I ŞŞWOLD BUY ELEZADETH'S LITUSE WILL RAGYULL ME LT TIA ZEMTLIL BLUE ḰLUTÞÌT MIARĀ BŽTUŸUSĀ SEĀĤLA KEMIE FEEL IT MAKŰE YOUYNG "" AGAIN"".
 '''
+format = '''The interpretation format is: I should ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
         
-             Description: {description}."""
+             Description: {description}.
+             {format}"""
 
 pipe = LLM(args)
 print(pipe(prompt))
