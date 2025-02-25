@@ -119,30 +119,14 @@ class Evaluation:
         print(saving_path)
         print(args.result_path)
         print(args.result_file)
-        # results2 = pd.read_csv(os.path.join(args.result_path,
-        #                                     'real_ads_human_annotation_description_not_text.csv'))
-        # results1 = pd.read_csv(os.path.join(args.result_path,
-        #                                     'real_ads_human_annotation_description_not_text.csv'))
-        # descriptions2 = pd.read_csv(os.path.join(args.result_path,
-        #                                          'real_ads_human_annotation_description_not_text.csv'))
-        # descriptions1 = pd.read_csv(os.path.join(args.result_path,
-        #                                          'real_ads_human_annotation_description_not_text.csv'))
-        descriptions2 = pd.read_csv(args.description_file)
-        descriptions1 = pd.read_csv(args.description_file)
+
+        descriptions = pd.read_csv(args.description_file)[:290]
         persuasiveness_scores = {}
-        for row in descriptions1.values:
+        for row in descriptions.values:
             image_url = row[0]
-            # if image_url not in results2.image_url.values:
-            #     continue
-            if image_url not in descriptions2.ID.values:
-                continue
             print(image_url)
-            # generated_image_path1 = row[3]
-            # generated_image_path2 = results2.loc[results2['image_url'] == image_url]['generated_image_url'].values[0]
-            generated_image1 = descriptions1.loc[descriptions1['ID'] == image_url, 'description'].values[0]
-            generated_image2 = descriptions2.loc[descriptions2['ID'] == image_url, 'description'].values[0]
-            # if 'yes' not in generated_image1.split('Q2:')[0].lower():
-            #     persuasiveness_scores[image_url] = [0] * 12
+            generated_image1 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
+            generated_image2 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
             persuasiveness_score = score_metrics.get_llm_multi_question_persuasiveness_ranking(generated_image1.split('Q2:')[-1],
                                                                                                generated_image2.split('Q2:')[-1],
                                                                                                image_url)
@@ -150,7 +134,6 @@ class Evaluation:
             print('*' * 80)
             persuasiveness_scores[image_url] = list(persuasiveness_score.values())
 
-            # print(f'average persuasiveness is {sum(persuasiveness_scores) / len(persuasiveness_scores)}')
             with open(saving_path, "w") as outfile:
                 json.dump(persuasiveness_scores, outfile)
 
@@ -570,7 +553,7 @@ class Evaluation:
             with open(saving_path, "w") as outfile:
                 json.dump(creativity_scores, outfile)
         print(f'number of images with no product image is: {no_product_image_count}')
-        print(f'average creativity score: {sum(creativity_scores.values)/len(list(creativity_scores.keys))}')
+
 
 
     def evaluate_text_based_persuasiveness_creativity(self, args):
@@ -631,6 +614,7 @@ class Evaluation:
                 json.dump(creativity_scores, outfile)
 
         print(f'number of images with no product image is: {no_product_image_count}')
+        print(f'average creativity score: {sum(creativity_scores.values) / len(list(creativity_scores.keys))}')
         print('\n - '.join(print_list))
     def evaluate_action_reason_VLM(self, args):
         results = {'acc@1': 0, 'acc@2': 0, 'acc@3': 0,
