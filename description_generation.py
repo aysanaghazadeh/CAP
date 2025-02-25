@@ -207,6 +207,8 @@ def get_negative_descriptions(args):
 if __name__ == '__main__':
     args = get_args()
     test_images = get_test_data(args)['ID'].values[:290]
-    # descriptions = get_descriptions(args)
-    descriptions = get_llm_generated_prompt(args, test_images)
+    if args.description_goal == 'image_descriptor':
+        descriptions = get_descriptions(args)
+    if args.description_goal == 'prompt_expansion':
+        descriptions = get_llm_generated_prompt(args, test_images)
     # get_negative_descriptions(args)

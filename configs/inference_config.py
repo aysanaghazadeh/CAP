@@ -38,6 +38,14 @@ def parse_args():
                         type=str,
                         default='PittAd',
                         help='Choose between PittAd, whoops')
+    parser.add_argument('--AD_type',
+                        type=str,
+                        default='COM',
+                        choices=['COM', 'PSA'])
+    parser.add_argument('--description_goal',
+                        type=str,
+                        default='prompt_expansion',
+                        choices=['prompt_expansion', 'image_descriptor'])
     parser.add_argument('--description_type',
                         type=str,
                         default='IN',
