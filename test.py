@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 args.LLM = 'QWenLM'
 description = '''
-The image depicts a dramatic and exaggerated encounter between a cat and a mouse. The cat, with a large and intense expression, is depicted with wide eyes and a slightly open mouth, as if startled or in mid-pounce. Its body is low to the ground, with paws extended forward, suggesting it is about to leap. The mouse, in contrast, appears poised and ready to run, with its body angled and its tail trailing behind. The mouse's expression is focused and alert. The background is a simple, muted gradient, which helps to highlight the tension between the two animals. The lighting accentuates the textures of the cat's fur and the mouse's fur, adding depth and realism to the scene.
+The image depicts an animated scene featuring a large, gray mouse with big ears and wide, expressive eyes running down a dirt path. The mouse's mouth is open, giving the impression that it is shouting or laughing. Behind it, a small, gray and white kitten with curious eyes is following closely. The background is softly blurred, emphasizing the motion of the mouse and kitten. The overall style is whimsical and cartoon-like, with a warm color palette that adds to the playful atmosphere.
 '''
 format = '''The interpretation format is: ${object1} is ${action} ${object2}. Where object1 and object2 are either cat or mouse. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
