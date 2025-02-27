@@ -1,4 +1,4 @@
-from FlagEmbedding import BGEM3FlagModel
+# from FlagEmbedding import BGEM3FlagModel
 # import json
 #
 #
