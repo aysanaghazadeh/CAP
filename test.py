@@ -102,7 +102,7 @@ format = '''The interpretation format is: ${object1} is ${action} ${object2}. Wh
 prompt = f"""What is the correct interpretation for the described image:
 
              Description: {description}.
-             """
+             {format}"""
 
 pipe = LLM(args)
 print(pipe(prompt))
