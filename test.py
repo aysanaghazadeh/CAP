@@ -96,7 +96,7 @@ from configs.evaluation_config import get_args
 args = get_args()
 args.LLM = 'QWenLM'
 description = '''
-The image is a black and white photograph featuring a tender moment between a woman and a baby. The woman, wearing a headscarf, is smiling gently at the baby, who is reaching out to touch her face. The baby, dressed in a simple outfit, appears to be in a joyful mood, with its tongue playfully sticking out. The woman’s expression is warm and loving, and the overall atmosphere of the image is one of affection and connection. The background is a smooth, neutral gray, which emphasizes the focus on the interaction between the woman and the baby. The image captures an intimate and heartwarming scene.
+The image is a sepia-toned illustration of a woman and a baby. The woman has dark hair tied back and is smiling warmly while holding the baby close. She has a traditional bindi on her forehead. The baby, who appears to be a young infant, is touching her face and smiling. The baby is naked, emphasizing a tender, intimate moment between the two. The overall atmosphere is serene and loving, with a focus on the bond between the mother and child.
 '''
 format = '''The interpretation format is: ${object1} is ${action} ${object2}. Where object1 and object2 are either woman or baby. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
