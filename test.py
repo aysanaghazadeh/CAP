@@ -98,7 +98,7 @@ args.LLM = 'QWenLM'
 description = '''
 The image depicts a dramatic and exaggerated encounter between a cat and a mouse. The cat, with a large and intense expression, is depicted with wide eyes and a slightly open mouth, as if startled or in mid-pounce. Its body is low to the ground, with paws extended forward, suggesting it is about to leap. The mouse, in contrast, appears poised and ready to run, with its body angled and its tail trailing behind. The mouse's expression is focused and alert. The background is a simple, muted gradient, which helps to highlight the tension between the two animals. The lighting accentuates the textures of the cat's fur and the mouse's fur, adding depth and realism to the scene.
 '''
-format = '''The interpretation format is: ${object1} is ${action} ${object2}. Where object1 and object2 are either woman or baby. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
+format = '''The interpretation format is: ${object1} is ${action} ${object2}. Where object1 and object2 are either cat or mouse. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
 prompt = f"""What is the correct interpretation for the described image:
 
              Description: {description}.
