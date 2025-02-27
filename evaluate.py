@@ -614,7 +614,7 @@ class Evaluation:
                 json.dump(creativity_scores, outfile)
 
         print(f'number of images with no product image is: {no_product_image_count}')
-        print(f'average creativity score: {sum(creativity_scores.values) / len(list(creativity_scores.keys))}')
+        print(f'average creativity score: {sum(creativity_scores.values()) / len(list(creativity_scores.keys()))}')
         print('\n - '.join(print_list))
     def evaluate_action_reason_VLM(self, args):
         results = {'acc@1': 0, 'acc@2': 0, 'acc@3': 0,
