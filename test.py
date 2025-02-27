@@ -1,57 +1,57 @@
 from FlagEmbedding import BGEM3FlagModel
-import json
-
-
-model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
-action_reason_file = json.load(open('../Data/PittAd/train/QA_Combined_Action_Reason_train.json'))
-alignment_file = 'IN_InternVL_LLM_input_LLAMA3_FTFalse_Flux_20250220_012210_description_single_paragraph_full_descriptionLLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'
-alignment = json.load(open(f'../experiments/results/{alignment_file}'))
-alignment_score = {}
-for image_url in alignment:
-    if alignment[image_url] == [0, 0, 0, 0]:
-        alignment_score[image_url] = [0, 0, 0, 0]
-        with open(f'../experiments/results/{alignment_file}', "w") as outfile:
-            json.dump(alignment_score, outfile)
-        continue
-    similarity_score = 0
-    similarity_scores_action = []
-    similarity_scores_reason = []
-    action_reasons = action_reason_file[image_url][0]
-    generated_image_message = alignment[image_url][0].lower()
-    for action_reason in action_reasons:
-        print(action_reason)
-        action_reason = action_reason.lower()
-
-        similarity_score_action = model.compute_score([action_reason.split('because')[0],
-                                                       generated_image_message.split('because')[0]],
-                                                       max_passage_length=128,
-                                                       weights_for_different_modes=[0.4, 0.2, 0.4])[
-            'colbert+sparse+dense']
-        similarity_score_reason = model.compute_score([action_reason.split('because')[-1],
-                                                            generated_image_message.split('because')[-1]],
-                                                           max_passage_length=128,
-                                                           weights_for_different_modes=[0.4, 0.2, 0.4])[
-            'colbert+sparse+dense']
-        similarity_score += (similarity_score_action + similarity_score_reason * 4) / 5
-        print(similarity_score)
-        similarity_scores_action.append(similarity_score_action)
-        similarity_scores_reason.append(similarity_score_reason)
-
-    similarity_score = similarity_score / len(action_reasons)
-    alignment_score[image_url] = [generated_image_message,
-                                   similarity_score,
-                                   similarity_scores_action,
-                                   similarity_scores_reason]
-    with open(f'../experiments/results/{alignment_file}', "w") as outfile:
-        json.dump(alignment_score, outfile)
-
-score = 0
-count = 0
-for image_url in alignment_score:
-    score += alignment_score[image_url][1]
-    count += 1
-print(f'average score: {score/count}')
-
+# import json
+#
+#
+# model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
+# action_reason_file = json.load(open('../Data/PittAd/train/QA_Combined_Action_Reason_train.json'))
+# alignment_file = 'IN_InternVL_LLM_input_LLAMA3_FTFalse_Flux_20250220_012210_description_single_paragraph_full_descriptionLLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'
+# alignment = json.load(open(f'../experiments/results/{alignment_file}'))
+# alignment_score = {}
+# for image_url in alignment:
+#     if alignment[image_url] == [0, 0, 0, 0]:
+#         alignment_score[image_url] = [0, 0, 0, 0]
+#         with open(f'../experiments/results/{alignment_file}', "w") as outfile:
+#             json.dump(alignment_score, outfile)
+#         continue
+#     similarity_score = 0
+#     similarity_scores_action = []
+#     similarity_scores_reason = []
+#     action_reasons = action_reason_file[image_url][0]
+#     generated_image_message = alignment[image_url][0].lower()
+#     for action_reason in action_reasons:
+#         print(action_reason)
+#         action_reason = action_reason.lower()
+#
+#         similarity_score_action = model.compute_score([action_reason.split('because')[0],
+#                                                        generated_image_message.split('because')[0]],
+#                                                        max_passage_length=128,
+#                                                        weights_for_different_modes=[0.4, 0.2, 0.4])[
+#             'colbert+sparse+dense']
+#         similarity_score_reason = model.compute_score([action_reason.split('because')[-1],
+#                                                             generated_image_message.split('because')[-1]],
+#                                                            max_passage_length=128,
+#                                                            weights_for_different_modes=[0.4, 0.2, 0.4])[
+#             'colbert+sparse+dense']
+#         similarity_score += (similarity_score_action + similarity_score_reason * 4) / 5
+#         print(similarity_score)
+#         similarity_scores_action.append(similarity_score_action)
+#         similarity_scores_reason.append(similarity_score_reason)
+#
+#     similarity_score = similarity_score / len(action_reasons)
+#     alignment_score[image_url] = [generated_image_message,
+#                                    similarity_score,
+#                                    similarity_scores_action,
+#                                    similarity_scores_reason]
+#     with open(f'../experiments/results/{alignment_file}', "w") as outfile:
+#         json.dump(alignment_score, outfile)
+#
+# score = 0
+# count = 0
+# for image_url in alignment_score:
+#     score += alignment_score[image_url][1]
+#     count += 1
+# print(f'average score: {score/count}')
+#
 
 #
 # file_p = 'IN_InternVL_LLM_input_QWenLM_FTFalse_AuraFlow_20250127_124801_description_single_paragraph_full_description_persuasion_creativity.json'
@@ -90,19 +90,19 @@ print(f'average score: {score/count}')
 # print(score/count)
 
 
-# from LLMs.LLM import LLM
-# from configs.evaluation_config import get_args
-#
-# args = get_args()
-# # args.LLM = 'QWenLM'
-# description = '''
-# The image features a cup with a red and white striped design and a logo of a man's face. The cup is filled with several pieces of breaded and fried chicken nuggets. Some of the nuggets are also scattered on the table around the cup. In the background, there is a small bird, possibly a rooster, flying. A red cross symbol is also present in the upper right corner of the image. The setting appears to be indoors with a blurred background.
-# '''
-# format = '''The interpretation format is: I ${should or shouldn't} ${action} because ${reason}. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
-# prompt = f"""What is the correct interpretation for the described image:
-#
-#              Description: {description}.
-#              """
-#
-# pipe = LLM(args)
-# print(pipe(prompt))
+from LLMs.LLM import LLM
+from configs.evaluation_config import get_args
+
+args = get_args()
+args.LLM = 'QWenLM'
+description = '''
+The image is a black and white photograph featuring a tender moment between a woman and a baby. The woman, wearing a headscarf, is smiling gently at the baby, who is reaching out to touch her face. The baby, dressed in a simple outfit, appears to be in a joyful mood, with its tongue playfully sticking out. The woman’s expression is warm and loving, and the overall atmosphere of the image is one of affection and connection. The background is a smooth, neutral gray, which emphasizes the focus on the interaction between the woman and the baby. The image captures an intimate and heartwarming scene.
+'''
+format = '''The interpretation format is: ${object1} is ${action} ${object2}. Where object1 and object2 are either woman or baby. ONLY RETURN A SINGLE SENTENCE IN THIS FORMAT'''
+prompt = f"""What is the correct interpretation for the described image:
+
+             Description: {description}.
+             """
+
+pipe = LLM(args)
+print(pipe(prompt))
