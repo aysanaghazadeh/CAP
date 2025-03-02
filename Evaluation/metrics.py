@@ -341,7 +341,7 @@ class Metrics:
                 generated_image_message.split('because')[0]
             ]
             embeddings = self.model.encode(sentences)
-            similarity_score_action = self.model.similarity(embeddings, embeddings)[0][1]
+            similarity_score_action = self.model.similarity(embeddings, embeddings)[0][1].item()
 
             sentences = [
                 action_reason.split('because')[-1],
