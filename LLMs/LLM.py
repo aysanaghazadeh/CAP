@@ -7,6 +7,7 @@ from LLMs.vicuna import Vicuna
 from LLMs.LLAMA3_instruct import LLAMA3Instruct
 from LLMs.InternLM import InternLM
 from LLMs.QWenLM import QWenLM
+from LLMs.GPT4o import GPT4o
 
 
 class LLM(nn.Module):
@@ -20,7 +21,8 @@ class LLM(nn.Module):
             'Mistral7BInstruct': Mistral7BInstruct,
             'vicuna': Vicuna,
             'InternLM': InternLM,
-            'QWenLM': QWenLM
+            'QWenLM': QWenLM,
+            'GPT4o': GPT4o
         }
         self.model = model_map[args.LLM](args)
 
