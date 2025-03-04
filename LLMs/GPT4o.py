@@ -23,4 +23,4 @@ class GPT4o(nn.Module):
                 }
             ]
         )
-        return completion.choices[0].message
+        return completion.choices[0].content
