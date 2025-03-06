@@ -6,6 +6,13 @@ while True:
         AIM_path = os.path.join('../experiments/results', input('AIM path:'))
         PA_path = os.path.join('../experiments/results', input('PA path:'))
         AIM = json.load(open(AIM_path))
+        if PA_path == None:
+            sum_val, image_count = 0, 0
+            for image_url in AIM:
+                sum_val += AIM[image_url]
+                image_count += 1
+            print(sum_val/image_count)
+            continue
         pa = json.load(open(PA_path))
         sum_val, image_count = 0, 0
         for image_url in AIM:
