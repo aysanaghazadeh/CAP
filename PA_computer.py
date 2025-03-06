@@ -1,8 +1,9 @@
 import json
+import os.path
 
 while True:
-    AIM_path = input('AIM path:')
-    PA_path = input('PA path')
+    AIM_path = os.path.join('../experiments/results', input('AIM path:'))
+    PA_path = os.path.join('../experiments/results', input('PA path:'))
     AIM = json.load(open(AIM_path))
     pa = json.load(open(PA_path))
     sum_val, image_count = 0, 0
