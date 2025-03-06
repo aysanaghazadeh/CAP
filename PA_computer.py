@@ -9,9 +9,9 @@ while True:
     sum_val, image_count = 0, 0
     for image_url in AIM:
         # AIM = sum(LLAMA_PSA_AIM[image_url][-1])/len(LLAMA_PSA_AIM[image_url][-1]) if LLAMA_PSA_AIM[image_url][-1] != 0 else 0
-        AIM = AIM[image_url][-1][0] if AIM[image_url][-1] != 0 else 0
-        if AIM > 1:
-            print(AIM, image_url)
+        aim_score = AIM[image_url][-1][0] if AIM[image_url][-1] != 0 else 0
+        if aim_score > 1:
+            print(aim_score, image_url)
         PA = pa[image_url]
         score, count = 0, 0
         for i, value in enumerate(PA):
@@ -19,7 +19,7 @@ while True:
                 continue
             score += value / 5
             count += 1
-        score += AIM * 2
+        score += aim_score * 2
         count += 2
         # print(score/count, count)
         sum_val += score / count
