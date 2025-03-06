@@ -196,6 +196,14 @@ class Evaluation:
             # print(f'average persuasiveness is {sum(persuasiveness_scores) / len(persuasiveness_scores)}')
             with open(saving_path, "w") as outfile:
                 json.dump(alignment_scores, outfile)
+        sum_scores, count = 0, 0
+        for image_url in alignment_scores:
+            sum_scores += alignment_scores[image_url][1]
+            count += 1
+        alignment_scores['average'] = sum_scores/count
+        print(f'average alignment scores is {alignment_scores["average"]}')
+        with open(saving_path, "w") as outfile:
+            json.dump(alignment_scores, outfile)
 
     @staticmethod
     def evaluate_multi_question(args):
