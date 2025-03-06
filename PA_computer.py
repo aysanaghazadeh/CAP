@@ -27,5 +27,7 @@ while True:
             image_count += 1
         print(sum_val / image_count, image_count)
         print('-' * 150)
-    except:
+    except Exception as e:
+        # Code to handle the exception
+        print("An error occurred:", e)
         print(AIM[image_url])
