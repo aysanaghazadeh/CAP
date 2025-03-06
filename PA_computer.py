@@ -31,3 +31,6 @@ while True:
         # Code to handle the exception
         print("An error occurred:", e)
         print(AIM[image_url])
+    except KeyboardInterrupt:
+        print("\nKeyboard Interrupt detected! Exiting...")
+        break
