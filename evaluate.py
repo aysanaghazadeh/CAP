@@ -554,8 +554,6 @@ class Evaluation:
                 json.dump(creativity_scores, outfile)
         print(f'number of images with no product image is: {no_product_image_count}')
 
-
-
     def evaluate_text_based_persuasiveness_creativity(self, args):
         def get_objects(action_reason):
             action_reason = '\n-'.join(action_reason)
@@ -611,12 +609,17 @@ class Evaluation:
                 f'creativity score for image {image_url} is {creativity_scores[image_url]}')
             # if image_url in ['5/102155.jpg', '9/76489.jpg', '5/6125.jpg', '1/29981.jpg']:
             #     print_list.append(f'objects for {image_url} are {get_objects(action_reasons)}')
+            print(f'number of images with no product image is: {no_product_image_count}')
+            print(f'average creativity score: {sum(creativity_scores.values()) / len(list(creativity_scores.keys()))}')
+            print('\n - '.join(print_list))
+            creativity_scores['average'] = sum(creativity_scores.values()) / len(list(creativity_scores.keys()))
             with open(saving_path, "w") as outfile:
                 json.dump(creativity_scores, outfile)
 
         print(f'number of images with no product image is: {no_product_image_count}')
-        print(f'average creativity score: {sum(creativity_scores.values()) / len(list(creativity_scores.keys()))}')
+        print(f'average creativity score: {creativity_scores["average"]}')
         print('\n - '.join(print_list))
+
     def evaluate_action_reason_VLM(self, args):
         results = {'acc@1': 0, 'acc@2': 0, 'acc@3': 0,
                    'p@1': 0, 'p@2': 0, 'p@3': 0}
@@ -666,6 +669,9 @@ class Evaluation:
             print('-' * 80)
             with open(saving_path, "w") as outfile:
                 json.dump(image_text_alignment_scores, outfile)
+
+        with open(saving_path, "w") as outfile:
+            json.dump(image_text_alignment_scores, outfile)
 
     def evaluate_whoops_VLM(self, args):
         results = {}
