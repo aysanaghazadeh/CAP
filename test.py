@@ -6,7 +6,8 @@ model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
 action_reason_file = json.load(open('../Data/PittAd/train/QA_Combined_Action_Reason_train.json'))
 # alignment_file = 'LLM_input_QWenLM_FTFalse_PSALLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json_Flux_20250225_003919LLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'
 while True:
-    alignment_file = input('file')
+    alignment_file = input('input file:')
+    print('input recieved:', alignment_file)
     alignment = json.load(open(f'../experiments/results/{alignment_file}'))
     alignment_score = {}
     for image_url in alignment:
@@ -46,6 +47,7 @@ while True:
                                        similarity_scores_reason]
         with open(f'../experiments/results/{alignment_file}', "w") as outfile:
             json.dump(alignment_score, outfile)
+            print('writing done')
 
     score = 0
     count = 0
