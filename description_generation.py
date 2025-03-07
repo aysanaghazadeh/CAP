@@ -101,11 +101,10 @@ def get_descriptions(args):
     description_file = os.path.join(args.result_path,
                                     f'{args.description_type}'
                                     f'_{args.VLM}'
-                                    f'_{args.test_set_QA.replace(".csv", "")}',
-                                    f'_{args.VLM_prompt.replace("jinja", "csv")}')
+                                    f'_{args.test_set_QA.replace(".csv", "")}'
                                     # f'_LLM_input_LLAMA3_instruct_FTFalse_P
                                     # SA_Flux'
-                                    # f'_description_single_paragraph_full_description.csv')
+                                    f'_description_single_paragraph_full_description_with_text.csv')
     # description_file = os.path.join(args.result_path,
     #                                 'real_ads_human_annotation_description_not_text.csv')
     if os.path.exists(description_file):
