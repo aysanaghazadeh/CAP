@@ -2,35 +2,48 @@ import json
 import os.path
 
 
-image_list = [
-    "0/41530.jpg",
-    "0/45970.jpg",
-    "0/73110.jpg",
-    "0/116140.jpg",
-    "1/57011.jpg",
-    "1/112811.jpg",
-    "2/116492.jpg",
-    "3/81633.jpg",
-    "3/134033.jpg",
-    "3/134973.jpg",
+first_image_list = [
+    "6/143816.jpg",
+    "8/7608.jpg",
     "4/102794.jpg",
     "4/134044.jpg",
-    "5/71815.jpg",
-    "5/71965.jpg",
-    "6/17276.jpg",
     "6/17896.jpg",
-    "6/90766.jpg",
-    "6/143816.jpg",
-    "7/41457.jpg",
-    "7/46267.jpg",
     "7/116347.jpg",
-    "8/7608.jpg"
+    "7/46267.jpg",
+    "6/90766.jpg",
+    "6/17276.jpg",
+    "3/134973.jpg",
+    "2/116492.jpg",
+    "0/73110.jpg",
+    "0/45970.jpg",
+    "0/41530.jpg"
 ]
+
+
+second_image_list = [
+    "0/41530.jpg",
+    "5/71965.jpg",
+    "0/116140.jpg",
+    "1/57011.jpg",
+    "3/134033.jpg",
+    "5/71815.jpg",
+    "1/112811.jpg",
+    "3/81633.jpg",
+    "4/134044.jpg",
+    "6/143816.jpg",
+    "7/41457.jpg"
+]
+
 
 while True:
     try:
         AIM_path = os.path.join('../experiments/results', input('AIM path:'))
         PA_path = os.path.join('../experiments/results', input('PA path:'))
+        image_set = input('which set:')
+        if image_set == 'first':
+            image_list = first_image_list
+        else:
+            image_list = second_image_list
         AIM = json.load(open(AIM_path))
         if PA_path == None:
             sum_val, image_count = 0, 0
