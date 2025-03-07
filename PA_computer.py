@@ -1,6 +1,32 @@
 import json
 import os.path
 
+
+image_list = [
+    "0/41530.jpg",
+    "0/45970.jpg",
+    "0/73110.jpg",
+    "0/116140.jpg",
+    "1/57011.jpg",
+    "1/112811.jpg",
+    "2/116492.jpg",
+    "3/81633.jpg",
+    "3/134033.jpg",
+    "3/134973.jpg",
+    "4/102794.jpg",
+    "4/134044.jpg",
+    "5/71815.jpg",
+    "5/71965.jpg",
+    "6/17276.jpg",
+    "6/17896.jpg",
+    "6/90766.jpg",
+    "6/143816.jpg",
+    "7/41457.jpg",
+    "7/46267.jpg",
+    "7/116347.jpg",
+    "8/7608.jpg"
+]
+
 while True:
     try:
         AIM_path = os.path.join('../experiments/results', input('AIM path:'))
@@ -34,6 +60,9 @@ while True:
             # print(score/count, count)
             sum_val += score / count
             image_count += 1
+            if image_url in image_list:
+                print(f'score for {image_url}is {score/count}')
+
         print(sum_val / image_count, image_count)
         print('-' * 150)
     except Exception as e:
