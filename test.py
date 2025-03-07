@@ -11,6 +11,8 @@ while True:
     alignment = json.load(open(f'../experiments/results/{alignment_file}'))
     alignment_score = {}
     for image_url in alignment:
+        if image_url == 'average':
+            continue
         if alignment[image_url] == [0, 0, 0, 0]:
             alignment_score[image_url] = [0, 0, 0, 0]
             with open(f'../experiments/results/{alignment_file}', "w") as outfile:
