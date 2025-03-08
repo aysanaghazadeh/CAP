@@ -92,6 +92,7 @@ while True:
             sum_val += score / count
             image_count += 1
             if image_url in image_list:
+                print(f'score for {image_url}is {score/count, count}')
                 print(f'score for {image_url}is {AIM[image_url][1]}')
 
         print(sum_val / image_count, image_count)
