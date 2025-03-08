@@ -51,7 +51,9 @@ third_image_list = [
     "4/84094.jpg", "4/84094.jpg", "4/84094.jpg",
     "4/46914.jpg", "4/46914.jpg", "4/46914.jpg",
     "6/14807",
-    "8/52488.jpg", "8/52488.jpg", "8/52488.jpg",
+]
+
+fourth_list = ["8/52488.jpg", "8/52488.jpg", "8/52488.jpg",
     "4/84094.jpg", "4/84094.jpg", "4/84094.jpg",
     "4/46914.jpg", "4/46914.jpg", "4/46914.jpg",
     "6/148076.jpg", "6/148076.jpg", "6/148076.jpg",
@@ -66,10 +68,7 @@ third_image_list = [
     "5/107845.jpg", "5/107845.jpg", "5/107845.jpg",
     "5/128995.jpg", "5/128995.jpg", "5/128995.jpg",
     "7/115587.jpg", "7/115587.jpg", "7/115587.jpg",
-    "6/141276.jpg", "6/141276.jpg", "6/141276.jpg"
-]
-
-
+    "6/141276.jpg", "6/141276.jpg", "6/141276.jpg"]
 
 
 
@@ -82,9 +81,12 @@ while True:
             image_list = first_image_list
         elif image_set == 'third':
             image_list = third_image_list
-        else:
+        elif image_set == 'second':
             image_list = second_image_list
+        else:
+            image_list = fourth_list
         AIM = json.load(open(AIM_path))
+
         if PA_path == None:
             sum_val, image_count = 0, 0
             for image_url in AIM:
