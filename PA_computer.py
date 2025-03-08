@@ -34,6 +34,24 @@ second_image_list = [
     "7/41457.jpg"
 ]
 
+third_image_list = [
+    "8/138668.jpg", "8/138668.jpg", "8/138668.jpg",
+    "8/121068.jpg", "8/121068.jpg", "8/121068.jpg",
+    "8/57788.jpg", "8/57788.jpg", "8/57788.jpg",
+    "7/33807.jpg", "7/33807.jpg", "7/33807.jpg",
+    "4/129394.jpg", "4/129394.jpg", "4/129394.jpg",
+    "4/78954.jpg", "4/78954.jpg", "4/78954.jpg",
+    "4/46914.jpg", "4/46914.jpg", "4/46914.jpg",
+    "2/146302.jpg", "2/146302.jpg", "2/146302.jpg",
+    "2/124992.jpg", "2/124992.jpg", "2/124992.jpg",
+    "2/57982.jpg", "2/57982.jpg", "2/57982.jpg",
+    "0/111880.jpg", "0/111880.jpg", "0/111880.jpg",
+    "0/24680.jpg", "0/24680.jpg", "0/24680.jpg",
+    "8/52488.jpg", "8/52488.jpg", "8/52488.jpg",
+    "4/84094.jpg", "4/84094.jpg", "4/84094.jpg",
+    "4/46914.jpg", "4/46914.jpg", "4/46914.jpg",
+    "6/14807"]
+
 
 while True:
     try:
@@ -43,7 +61,7 @@ while True:
         if image_set == 'first':
             image_list = first_image_list
         else:
-            image_list = second_image_list
+            image_list = third_image_list
         AIM = json.load(open(AIM_path))
         if PA_path == None:
             sum_val, image_count = 0, 0
