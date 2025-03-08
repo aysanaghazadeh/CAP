@@ -60,8 +60,10 @@ while True:
         image_set = input('which set:')
         if image_set == 'first':
             image_list = first_image_list
-        else:
+        elif image_set == 'third':
             image_list = third_image_list
+        else:
+            image_list = second_image_list
         AIM = json.load(open(AIM_path))
         if PA_path == None:
             sum_val, image_count = 0, 0
@@ -92,7 +94,7 @@ while True:
             sum_val += score / count
             image_count += 1
             if image_url in image_list:
-                print(f'score for {image_url}is {score/count, count}')
+                print(f'score for {image_url}is {score/count}')
                 print(f'score for {image_url}is {AIM[image_url][1]}')
 
         print(sum_val / image_count, image_count)
