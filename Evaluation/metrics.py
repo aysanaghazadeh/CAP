@@ -17,7 +17,7 @@ from VLMs.InternVL2 import InternVL
 from VLMs.multi_image_InternVL import MultiInternVL
 import itertools
 from LLMs.LLM import LLM
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
 from cleanfid import fid
 
 
