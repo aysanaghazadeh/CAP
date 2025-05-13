@@ -18,8 +18,8 @@ from VLMs.multi_image_InternVL import MultiInternVL
 import itertools
 from LLMs.LLM import LLM
 from sentence_transformers import SentenceTransformer
+from cleanfid import fid
 
-api_key = "sk-proj-zfkbSHxUNuF7Ev8TEWWRT3BlbkFJieFKktR5T8tIUVNAJRBz"
 
 
 # Function to convert an image file to a tensor
@@ -81,29 +81,12 @@ class Metrics:
                                                               trust_remote_code=True)
 
     @staticmethod
-    def get_FID(generated_image_path, real_image_path, args):
-        image_tensor_1 = image_to_tensor(generated_image_path)
-        image_tensor_2 = image_to_tensor(real_image_path)
-
-        with tempfile.TemporaryDirectory() as tempdir:
-            dataset_path_1 = os.path.join(tempdir, 'set1')
-            dataset_path_2 = os.path.join(tempdir, 'set2')
-
-            os.makedirs(dataset_path_1, exist_ok=True)
-            os.makedirs(dataset_path_2, exist_ok=True)
-
-            # Save the tensors as images
-            TF.to_pil_image(image_tensor_1.squeeze()).save(os.path.join(dataset_path_1, 'image1.png'))
-            TF.to_pil_image(image_tensor_2.squeeze()).save(os.path.join(dataset_path_2, 'image2.png'))
-
-            # Calculate FID score
-            fid_value = calculate_fid_given_paths([dataset_path_1, dataset_path_2],
-                                                  batch_size=1,
-                                                  device=torch.device(args.device),
-                                                  dims=2048)
-
-            return fid_value
-
+    def get_FID(generated_image_path, real_image_path):
+        score = fid.compute_fid(
+            real_image_path,
+            generated_image_path,
+        )
+        return score
     def get_image_image_CLIP_score(self, generated_image_path, real_image_path, args):
         # Load images
         image1 = Image.open(real_image_path).convert("RGB")

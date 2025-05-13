@@ -416,6 +416,16 @@ class Evaluation:
                 with open(saving_path, "w") as outfile:
                     json.dump(persuasiveness_scores, outfile)
 
+    @staticmethod
+    def evaluate_FID(args):
+        metrics = Metrics(args)
+        results = pd.read_csv(os.path.join(args.result_path, args.result_file))
+        generated_image_paths = results.generated_image_url.values
+        real_image_paths = [os.path.join(args.data_path, args.test_set_images, image_url) for image_url in results.image_url.values]
+        FID_scores = metrics.get_FID(generated_image_paths, real_image_paths)
+        print(f'Average FID is: {FID_scores}')
+        
+        
     def evaluate_sampled_results(self, args):
         metrics = Metrics(args)
         results = pd.read_csv(os.path.join(args.result_path, args.result_file)).values
