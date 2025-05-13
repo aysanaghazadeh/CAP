@@ -6,7 +6,7 @@ from PIL import Image
 import torch
 from torch import nn
 from torchvision.transforms import functional as TF
-from pytorch_fid.fid_score import calculate_fid_given_paths
+# from pytorch_fid.fid_score import calculate_fid_given_paths
 import os
 import tempfile
 from transformers import pipeline, BitsAndBytesConfig
