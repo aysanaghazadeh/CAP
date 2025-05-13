@@ -31,8 +31,8 @@ def image_to_tensor(image_path):
 
 class Metrics:
     def __init__(self, args):
-        self.clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device=args.device)
-        self.clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+        # self.clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device=args.device)
+        # self.clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
         self.args = args
         alignment_scores = [
             'image_text_alignment',
