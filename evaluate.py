@@ -420,7 +420,7 @@ class Evaluation:
     def evaluate_FID(args):
         metrics = Metrics(args)
         results = pd.read_csv(os.path.join(args.result_path, args.result_file)).values
-        generated_image_paths = '/'.join(results[0][3].split('/')[:-3])
+        generated_image_paths = '/'.join(results[0][3].split('/')[:-2])
         real_image_paths = os.path.join(args.data_path, args.test_set_images)
         FID_scores = 0
         for i in range(11):
