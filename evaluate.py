@@ -419,11 +419,13 @@ class Evaluation:
     @staticmethod
     def evaluate_FID(args):
         metrics = Metrics(args)
-        results = pd.read_csv(os.path.join(args.result_path, args.result_file))
-        generated_image_paths = results.generated_image_url.values
-        real_image_paths = [os.path.join(args.data_path, args.test_set_images, image_url) for image_url in results.image_url.values]
-        FID_scores = metrics.get_FID(generated_image_paths, real_image_paths)
-        print(f'Average FID is: {FID_scores}')
+        results = pd.read_csv(os.path.join(args.result_path, args.result_file)).values
+        generated_image_paths = '/'.join(results[0][3].split('/')[:-3])
+        real_image_paths = os.path.join(args.data_path, args.test_set_images)
+        FID_scores = 0
+        for i in range(11):
+            FID_scores += metrics.get_FID(os.path.join(generated_image_paths, str(i)), os.path.join(real_image_paths, str(i)))
+        print(f'Average FID is: {FID_scores/11}')
         
         
     def evaluate_sampled_results(self, args):
