@@ -92,7 +92,7 @@ class Metrics:
     def get_IS(generated_image_path):
         from torch_fidelity import calculate_metrics
         
-        metrics = calculate_metrics(input1=generated_image_path, metrics=['inception_score'])
+        metrics = calculate_metrics(input1=generated_image_path, metrics=['isc'])
         print(metrics['inception_score_mean'])
         return metrics['inception_score_mean']
     
