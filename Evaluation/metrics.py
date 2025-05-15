@@ -87,6 +87,15 @@ class Metrics:
             generated_image_path,
         )
         return score
+    
+    @staticmethod
+    def get_IS(generated_image_path):
+        from torch_fidelity import calculate_metrics
+        
+        metrics = calculate_metrics(input1=generated_image_path, metrics=['inception_score'])
+        print(metrics['inception_score_mean'])
+        return metrics['inception_score_mean']
+    
     def get_image_image_CLIP_score(self, generated_image_path, real_image_path, args):
         # Load images
         image1 = Image.open(real_image_path).convert("RGB")

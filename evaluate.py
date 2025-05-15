@@ -426,7 +426,16 @@ class Evaluation:
         for i in range(11):
             FID_scores += metrics.get_FID(os.path.join(generated_image_paths, str(i)), os.path.join(real_image_paths, str(i)))
         print(f'Average FID is: {FID_scores/11}')
-        
+    
+    @staticmethod
+    def evaluate_IS(args):
+        metrics = Metrics(args)
+        results = pd.read_csv(os.path.join(args.result_path, args.result_file)).values
+        generated_image_paths = '/'.join(results[0][3].split('/')[:-2])
+        IS_scores = 0
+        for i in range(11):
+            IS_scores += metrics.get_IS(os.path.join(generated_image_paths, str(i)))
+        print(f'Average IS is: {IS_scores/11}')
         
     def evaluate_sampled_results(self, args):
         metrics = Metrics(args)

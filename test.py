@@ -114,21 +114,84 @@
 # # print(pipe(prompt))
 
 
-import json
+# import json
 
-alignment_file = json.load(open('/users/aysanaghazadeh/Downloads/IN_InternVL_AR_AuraFlow_20240816_214421_description_single_paragraph_full_descriptionVILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
-creativity_file = json.load(open('/users/aysanaghazadeh/Downloads/AR_AuraFlow_20240816_214421weighted_creativity.json'))
+# alignment_file = json.load(open('/users/aysanaghazadeh/Downloads/IN_InternVL_AR_AuraFlow_20240816_214421_description_single_paragraph_full_descriptionVILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
+# creativity_file = json.load(open('/users/aysanaghazadeh/Downloads/AR_AuraFlow_20240816_214421weighted_creativity.json'))
 
-clip_sim_sum = 0
-count = 0
-for image_url in creativity_file:
-    if image_url not in alignment_file:
-        continue
-    creativity_score = creativity_file[image_url]
-    alignment_score = alignment_file[image_url][1]
-    print(f'creativity score: {creativity_score}')
-    print(f'alignment score: {alignment_score}')
-    clip_sim = alignment_score / creativity_score - 0.01
-    clip_sim_sum += clip_sim
-    count += 1
-print(f'Average clip sim is: {clip_sim_sum/count}')
+# clip_sim_sum = 0
+# count = 0
+# for image_url in creativity_file:
+#     if image_url not in alignment_file:
+#         continue
+#     creativity_score = creativity_file[image_url]
+#     alignment_score = alignment_file[image_url][1]
+#     print(f'creativity score: {creativity_score}')
+#     print(f'alignment score: {alignment_score}')
+#     clip_sim = alignment_score / creativity_score - 0.01
+#     clip_sim_sum += clip_sim
+#     count += 1
+# print(f'Average clip sim is: {clip_sim_sum/count}')
+
+# import json 
+
+
+# SDXL_com = json.load(open('/users/aysanaghazadeh/Downloads/AR_SDXL_20240613_204248VILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
+# AuraFlow_com = json.load(open('/users/aysanaghazadeh/Downloads/LLAMA3Instruct_descriptions_AuraFlow_20240817_185858VILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
+# SDXL_psa = json.load(open('/users/aysanaghazadeh/Downloads/IN_InternVL_AR_SDXL_20241012_005132_description_single_paragraph_no_textVILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
+# AuraFlow_psa = json.load(open('/users/aysanaghazadeh/Downloads/IN_InternVL_LLM_input_LLAMA3_instruct_FTFalse_PSA_AuraFlow_20240925_112154_description_single_paragraph_no_textVILA_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
+
+# com = ['8/138668.jpg', '8/121068.jpg', '8/57788.jpg', '7/33807.jpg', '4/129394.jpg', '4/78954.jpg', '4/46914.jpg', '2/146302.jpg', '2/124992.jpg', '2/57982.jpg', '0/111880.jpg', '8/52488.jpg', '4/84094.jpg', '4/46914.jpg', '6/148076.jpg', '6/158126.jpg']#, '8/121068.jpg', '6/155826.jpg', '5/129255.jpg', '7/12117.jpg', '5/51325.jpg', '6/125426.jpg', '7/54357.jpg', '5/107845.jpg', '5/128995.jpg', '7/115587.jpg', '6/141276.jpg']
+
+# PSA = ['6/143816.jpg', '8/7608.jpg', '4/102794.jpg', '4/134044.jpg', '6/17896.jpg', '7/116347.jpg', '7/46267.jpg', '6/90766.jpg', '6/17896.jpg', '6/17276.jpg', '4/102794.jpg', '3/134973.jpg', '2/116492.jpg', '0/73110.jpg', '0/45970.jpg', '0/41530.jpg']#, '0/41530.jpg', '5/71965.jpg', '0/116140.jpg', '1/57011.jpg', '3/134033.jpg', '5/71815.jpg', '1/112811.jpg', '3/81633.jpg', '4/134044.jpg', '6/143816.jpg', '7/41457.jpg']
+# alphas = [1, 2, 3, 4, 5]
+
+# print('--------------COM----------------')
+# for image_url in com:
+#     if AuraFlow_com[image_url][0] == 0:
+#         auraflow_action_score = 0
+#         auraflow_reason_score = 0
+#     else:
+#         auraflow_reason_score = sum(AuraFlow_com[image_url][-1])/len(AuraFlow_com[image_url][-1])
+#         auraflow_action_score = sum(AuraFlow_com[image_url][-2])/len(AuraFlow_com[image_url][-2])
+#     if SDXL_com[image_url][0] == 0:
+#         sdxl_action_score = 0
+#         sdxl_reason_score = 0
+#     else:
+#         sdxl_reason_score = sum(SDXL_com[image_url][-1])/len(SDXL_com[image_url][-1])
+#         sdxl_action_score = sum(SDXL_com[image_url][-2])/len(SDXL_com[image_url][-2])
+#     print(f'{image_url}:')
+#     print(f'auraflow: {AuraFlow_com[image_url][1]}')
+#     print(f'sdxl: {SDXL_com[image_url][1]}')
+#     for alpha in alphas:
+#         AIM_auraflow = (auraflow_action_score * 1 + auraflow_reason_score * (alpha)) / (1 + alpha)
+#         AIM_sdxl = (sdxl_action_score * 1 + sdxl_reason_score * (alpha)) / (1 + alpha)
+#         winner = 'auraflow' if AIM_auraflow > AIM_sdxl else 'sdxl'
+#         print(f'alpha: {alpha}, winner: {winner}')
+#     print('--------------------------------')
+
+# print('--------------PSA----------------')
+# for image_url in PSA:
+#     if AuraFlow_psa[image_url][0] == 0:
+#         auraflow_action_score = 0
+#         auraflow_reason_score = 0
+#     else:
+#         auraflow_reason_score = sum(AuraFlow_psa[image_url][-1])/len(AuraFlow_psa[image_url][-1])
+#         auraflow_action_score = sum(AuraFlow_psa[image_url][-2])/len(AuraFlow_psa[image_url][-2])
+#     if SDXL_psa[image_url][0] == 0:
+#         sdxl_action_score = 0
+#         sdxl_reason_score = 0
+#     else:
+#         sdxl_reason_score = sum(SDXL_psa[image_url][-1])/len(SDXL_psa[image_url][-1])
+#         sdxl_action_score = sum(SDXL_psa[image_url][-2])/len(SDXL_psa[image_url][-2])
+#     print(f'{image_url}:')
+#     print(f'auraflow: {AuraFlow_psa[image_url][1]}')
+#     print(f'sdxl: {SDXL_psa[image_url][1]}')
+#     for alpha in alphas:
+#         AIM_auraflow = (auraflow_action_score * 1 + auraflow_reason_score * (alpha)) / (1 + alpha)
+#         AIM_sdxl = (sdxl_action_score * 1 + sdxl_reason_score * (alpha)) / (1 + alpha)
+#         winner = 'auraflow' if AIM_auraflow > AIM_sdxl else 'sdxl'
+#         print(f'alpha: {alpha}, winner: {winner}')
+#     print('--------------------------------')
+
+
