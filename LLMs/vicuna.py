@@ -15,9 +15,9 @@ class Vicuna(nn.Module):
                 bnb_8bit_compute_dtype=torch.float16
             )
             self.tokenizer = AutoTokenizer.from_pretrained("lmsys/vicuna-13b-v1.5",
-                                                           token='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')
+                                                           token=os.environ.get('HF_TOKEN'))
             self.model = AutoModelForCausalLM.from_pretrained("lmsys/vicuna-13b-v1.5",
-                                                              token='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',
+                                                              token=os.environ.get('HF_TOKEN'),
                                                               quantization_config=quantization_config,
                                                               device_map="auto")
             if args.fine_tuned:

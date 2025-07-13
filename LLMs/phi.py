@@ -15,10 +15,10 @@ class Phi(nn.Module):
                 bnb_8bit_compute_dtype=torch.float16
             )
             self.tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3-mini-4k-instruct",
-                                                           token='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',
+                                                           token=os.environ.get('HF_TOKEN'),
                                                            trust_remote_code=True)
             self.model = AutoModelForCausalLM.from_pretrained("microsoft/Phi-3-mini-4k-instruct",
-                                                              token='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',
+                                                              token=os.environ.get('HF_TOKEN'),
                                                               device_map="auto",
                                                               quantization_config=quantization_config,
                                                               trust_remote_code=True)
@@ -30,4 +30,4 @@ class Phi(nn.Module):
             inputs = self.tokenizer(inputs, return_tensors="pt").to(device=self.args.device)
             generated_ids = self.model.generate(**inputs, max_new_tokens=10)
             return self.tokenizer.batch_decode(generated_ids)[0].split(':')[-1].split('<|assistant|>')[0]
-        # return self.model(**inputs)
+

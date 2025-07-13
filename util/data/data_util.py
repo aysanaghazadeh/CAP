@@ -48,7 +48,7 @@ def get_train_Mistral7B_Dataloader(args):
 
 def get_LLAMA3_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B",
-                                              token='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',
+                                              token=os.environ.get('HF_TOKEN'),
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
 
@@ -96,7 +96,7 @@ def get_train_LLAMA3_Dataloader(args):
 
 def get_LLAMA3_instruct_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
-                                              token='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',
+                                              token=os.environ.get('HF_TOKEN'),
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
 
@@ -172,8 +172,7 @@ def get_train_LLAMA3_instruct_Dataloader(args):
 
 def get_LLAMA3_CPO_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
-                                              #"meta-llama/Meta-Llama-3-8B-instruct",
-                                              token='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',
+                                              token=os.environ.get('HF_TOKEN'),
                                               trust_remote_code=True,
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
@@ -234,7 +233,7 @@ def get_train_LLAMA3_CPO_Dataloader(args):
 
 def get_LLAMA3_RLHF_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/DeepSeek-V2-Chat",#"meta-llama/Meta-Llama-3-8B",
-                                              token='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',
+                                              token=os.environ.get('HF_TOKEN'),
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.add_special_tokens({'pad_token': '[PAD]'})
@@ -297,7 +296,7 @@ def get_RLHF_train_LLAMA3_Dataloader(args):
 def get_LLAMA3_RLAIF_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained(
         'meta-llama/Meta-Llama-3-8B-Instruct',
-        token='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',
+        token=os.environ.get('HF_TOKEN'),
         padding='max_length',
         max_length=512)
     tokenizer.pad_token = tokenizer.eos_token
@@ -338,7 +337,7 @@ def get_LLAMA3_RLAIF_Dataloader(args):
 def get_LLAMA3_DPO_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained(
         os.path.join(args.model_path, 'my_LLAMA3_large_sample_model/checkpoint-4350/'),
-        token='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',
+        token=os.environ.get('HF_TOKEN'),
         padding='left')
     tokenizer.pad_token = tokenizer.eos_token
 
@@ -348,10 +347,6 @@ def get_LLAMA3_DPO_training_data(args, image_urls):
                     Description of the image:
                 """
         data_point['prompt'] = prompt
-        # data_point['chosen'] = tokenizer.apply_chat_template(data_point['chosen'], tokenize=False)
-        # data_point['rejected'] = tokenizer.apply_chat_template(data_point['rejected'], tokenize=False)
-        # tokens = tokenizer.encode(prompt)
-        # data_point["input_ids"] = tokens
         return data_point
 
     QAs = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
@@ -395,7 +390,7 @@ def get_LLAMA3_DPO_Dataloader(args):
 
 def get_Phi3_training_data(args, image_urls):
     tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3-mini-4k-instruct",
-                                              token='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',
+                                              token=os.environ.get('HF_TOKEN'),
                                               trust_remote_code=True,
                                               padding='right')
     tokenizer.pad_token = tokenizer.eos_token
