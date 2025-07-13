@@ -16,26 +16,22 @@ class LLAMA3Instruct(nn.Module):
             )
             if args.fine_tuned:
                 self.model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
-                                                             token='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',
+                                                             token=os.environ.get('HF_TOKEN'),
                                                              device_map='auto')
                 self.tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
-                                                          token='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')
+                                                          token=os.environ.get('HF_TOKEN'))
                 self.tokenizer.pad_token = self.tokenizer.eos_token
                 self.tokenizer.padding_side = "right"
                 self.model = PeftModel.from_pretrained(self.model,
                                                        os.path.join(args.model_path,
                                                                     'my_LLAMA3_CPO/checkpoint-3000/'))
-                # self.model = PeftModel.from_pretrained(self.model,
-                #                                        os.path.join(args.model_path,
-                #                                                     'my_LLAMA3_instruct_InternVL_model_2',
-                #                                                     'checkpoint-700'))
             else:
                 model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
 
                 self.pipeline = pipeline(
                     "text-generation",
                     model=model_id,
-                    token='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',
+                    token=os.environ.get('HF_TOKEN'),
                     model_kwargs={"torch_dtype": torch.bfloat16},
                     device_map="auto",
                 )

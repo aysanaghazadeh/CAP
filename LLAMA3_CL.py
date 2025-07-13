@@ -17,7 +17,7 @@ def get_model():
     )
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
                                                  # "meta-llama/Meta-Llama-3-8B-instruct",
-                                                 token='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')
+                                                 token=os.environ.get('HF_TOKEN'))
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
     peft_config = LoraConfig(inference_mode=False,
@@ -33,7 +33,7 @@ def get_model():
         model.model_parallel = True
     tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct",
                                               # "meta-llama/Meta-Llama-3-8B-instruct",
-                                              token='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')
+                                              token=os.environ.get('HF_TOKEN'))
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
     return model, tokenizer

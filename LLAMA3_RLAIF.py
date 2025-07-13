@@ -47,20 +47,13 @@ def get_model():
     model_id = 'meta-llama/Meta-Llama-3-8B-Instruct'
     model = AutoModelForCausalLMWithValueHead.from_pretrained(
         model_id,
-        token='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',
+        hf_tDgxtoken=os.environ.get('HF_TOKEN'),
         peft_config=lora_config,
         load_in_4bit=True,
     ).to(device=args.device)
-    # ref_model = AutoModelForCausalLMWithValueHead.from_pretrained(
-    #     model_id,
-    #     token='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',
-    #     peft_config=lora_config,
-    #     load_in_4bit=True,
-    # ).to(device='cuda')
+    
     tokenizer = AutoTokenizer.from_pretrained('meta-llama/Meta-Llama-3-8B-Instruct',
-                                              # os.path.join(args.model_path, 'my_LLAMA3_large_sample_model/checkpoint'
-                                              #                               '-4350/'),
-                                              token='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')
+                                              token=os.environ.get('HF_TOKEN'))
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
     return model, tokenizer#, ref_model

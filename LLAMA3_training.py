@@ -41,7 +41,7 @@ def get_model():
         bnb_8bit_compute_dtype=torch.bfloat16
     )
     model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
-                                                 token='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',
+                                                 token=os.environ.get('HF_TOKEN'),
                                                  device_map='auto',
                                                  quantization_config=bnb_config)
     model.gradient_checkpointing_enable()
@@ -58,7 +58,7 @@ def get_model():
         model.is_parallelizable = True
         model.model_parallel = True
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-instruct",
-                                              token='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')
+                                              token=os.environ.get('HF_TOKEN'))
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
     return model, tokenizer
@@ -85,21 +85,7 @@ def get_training_args(args):
         report_to="none",
         logging_dir=os.path.join(args.results, 'logs')
     )
-    # training_args = TrainingArguments(
-    #     output_dir=args.model_path,
-    #     num_train_epochs=args.epochs,
-    #     per_device_train_batch_size=4,
-    #     warmup_steps=0.03,
-    #     logging_steps=10,
-    #     save_strategy="epoch",
-    #     evaluation_strategy="epoch",
-    #     learning_rate=args.lr,
-    #     bf16=True,
-    #     lr_scheduler_type='constant',
-    #     save_total_limit=3,
-    #     logging_dir=os.path.join(args.results, 'logs'),
-    #     remove_unused_columns=True
-    # )
+    
     if not os.path.exists(os.path.join(args.results, 'logs')):
         os.makedirs(os.path.join(args.results, 'logs'))
     return training_args

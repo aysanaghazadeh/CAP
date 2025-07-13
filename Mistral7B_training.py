@@ -16,7 +16,7 @@ def get_model():
     )
     model = AutoModelForCausalLM.from_pretrained("mistralai/Mistral-7B-v0.1",
                                                  device_map='auto',
-                                                 token='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',
+                                                 token=os.environ.get('HF_TOKEN'),
                                                  quantization_config=bnb_config)
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
@@ -31,7 +31,7 @@ def get_model():
         model.is_parallelizable = True
         model.model_parallel = True
     tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-v0.1",
-                                              token='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')
+                                              token=os.environ.get('HF_TOKEN'))
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
     return model, tokenizer

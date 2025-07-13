@@ -73,10 +73,10 @@ class Metrics:
                 # self.model = SentenceTransformer("BAAI/bge-m3")
         if args.evaluation_type == 'image_text_ranking':
             self.tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3-mini-4k-instruct",
-                                                           token='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',
+                                                           token=os.environ.get('HF_TOKEN'),
                                                            trust_remote_code=True)
             self.model = AutoModelForCausalLM.from_pretrained("microsoft/Phi-3-mini-4k-instruct",
-                                                              token='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',
+                                                              token=os.environ.get('HF_TOKEN'),
                                                               device_map="auto",
                                                               trust_remote_code=True)
 
@@ -1739,7 +1739,7 @@ class Whoops:
                              model_kwargs={"quantization_config": quantization_config},
                              trust_remote_code=True,
                              device_map='auto',
-                             token='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', )
+                             token=os.environ.get('HF_TOKEN'))
         self.QA = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
 
     @staticmethod
