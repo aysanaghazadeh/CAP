@@ -41,7 +41,7 @@ def parse_args():
     parser.add_argument('--AD_type',
                         type=str,
                         default='COM',
-                        choices=['COM', 'PSA'])
+                        choices=['COM', 'PSA', 'ALL'])
     parser.add_argument('--description_goal',
                         type=str,
                         default='prompt_expansion',
