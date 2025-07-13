@@ -76,6 +76,9 @@ def parse_args():
                         type=bool,
                         default=False,
                         help='True if you want to include the detected audience by LLM in the prompt.')
+    parser.add_argument('--with_physical_sensation',
+                        type=bool,
+                        default=False)
     parser.add_argument('--model_path',
                         type=str,
                         default='../models',

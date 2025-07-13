@@ -14,11 +14,13 @@ class PromptGenerator:
         self.sentiments = None
         self.topics = None
         self.audiences = None
+        self.physical_sensation = None
         self.set_LLM(args)
         self.set_descriptions(args)
         self.set_sentiments(args)
         self.set_topics(args)
         self.set_audience(args)
+        self.set_physical_sensation(args)
 
     def set_LLM(self, args):
         if args.text_input_type == 'LLM':
@@ -39,6 +41,10 @@ class PromptGenerator:
     def set_audience(self, args):
         if args.with_audience:
             self.audiences = self.get_all_audience(args)
+    
+    def set_physical_sensation(self, args):
+        if args.with_physical_sensation:
+            self.physical_sensation = self.get_all_physical_sensation(args)
 
     @staticmethod
     def get_all_sentiments(args):
@@ -64,6 +70,15 @@ class PromptGenerator:
         audiences = pd.read_csv(audience_file)
         audiences = audiences.set_index('ID')['description'].to_dict()
         return audiences
+    
+    @staticmethod
+    def get_all_physical_sensations(args):
+        if not args.with_physical_sensation:
+            return None
+        physical_sensation_file = os.path.join(args.data_path, f'train/physical_sensation_prediction_{args.LLM}__FTFalse_{args.AD_type}.csv')
+        physical_sensations = pd.read_csv(physical_sensation_file)
+        physical_sensations = physical_sensations.set_index('ID')['description'].to_dict()
+        return physical_sensations
 
     @staticmethod
     def get_all_descriptions(args):
@@ -127,11 +142,22 @@ class PromptGenerator:
                     audience = 'everyone'
             else:
                 print(f'there is no audience for image: {image_filename}')
+        physical_sensation = 'no sensation'
+        if args.with_physical_sensation:
+            if image_filename in self.physical_sensation:
+                physical_sensation = self.physical_sensation[image_filename]
+                if len(physical_sensation.split(':')) > 1:
+                    physical_sensation = physical_sensation.split(':')[-1].split('-')[-1]
+                else:
+                    audience = 'no sensation'
+            else:
+                print(f'there is no sensation for image: {image_filename}')
         data = {'action_reason': action_reason,
                 'description': self.get_description(image_filename, self.descriptions).split('Description of the image:')[-1],
                 'sentiment': sentiment,
                 'topic': topic,
-                'audience': audience}
+                'audience': audience,
+                'physical_sensation': physical_sensation}
         env = Environment(loader=FileSystemLoader(args.prompt_path))
         template = env.get_template(args.T2I_prompt)
         output = template.render(**data)
@@ -166,6 +192,16 @@ class PromptGenerator:
                     audience = 'everyone'
             else:
                 print(f'there is no audience for image: {image_filename}')
+        physical_sensation = 'no sensation'
+        if args.with_physical_sensation:
+            if image_filename in self.physical_sensation:
+                physical_sensation = self.physical_sensation[image_filename]
+                if len(physical_sensation.split(':')) > 1:
+                    physical_sensation = physical_sensation.split(':')[-1].split('-')[-1]
+                else:
+                    audience = 'no sensation'
+            else:
+                print(f'there is no sensation for image: {image_filename}')
         QA_path = args.test_set_QA if not args.train else args.train_set_QA
         QA_path = os.path.join(args.data_path, QA_path)
         QA = json.load(open(QA_path))
@@ -196,7 +232,8 @@ class PromptGenerator:
                 'adjective': adjective,
                 'sentiment': sentiment,
                 'topic': topic,
-                'audience': audience}
+                'audience': audience,
+                'physical_sensation': physical_sensation}
 
         print('data:', data)
         env = Environment(loader=FileSystemLoader(args.prompt_path))
