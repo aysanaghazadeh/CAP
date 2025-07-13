@@ -72,7 +72,7 @@ class PromptGenerator:
         return audiences
     
     @staticmethod
-    def get_all_physical_sensations(args):
+    def get_all_physical_sensation(args):
         if not args.with_physical_sensation:
             return None
         physical_sensation_file = os.path.join(args.data_path, f'train/physical_sensation_prediction_{args.LLM}__FTFalse_{args.AD_type}.csv')
