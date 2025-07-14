@@ -15,9 +15,10 @@ class AuraFlow(nn.Module):
         self.pipeline = AuraFlowPipeline.from_pretrained(
             "fal/AuraFlow-v0.2",
             torch_dtype=torch.float16,
-            variant="fp16",
-            quantization_config=quantization_config
-        ).to("cuda")
+            device_map='auto'
+            # variant="fp16",
+            # quantization_config=quantization_config
+        )
 
     def forward(self, prompt):
         image = self.pipeline(
