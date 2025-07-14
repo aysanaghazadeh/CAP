@@ -1,4 +1,5 @@
 # Paper Title: \'CAP: Evaluation of Persuasive and Creative Image Generation\'
+(ICCV 2025)
 
 ## Abstract
 CAP is a framework for evaluating advertisement images in terms of:
