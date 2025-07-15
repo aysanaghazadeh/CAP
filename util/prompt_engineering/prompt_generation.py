@@ -75,7 +75,7 @@ class PromptGenerator:
     def get_all_physical_sensation(args):
         if not args.with_physical_sensation:
             return None
-        physical_sensation_file = os.path.join(args.data_path, f'train/physical_sensation_prediction_{args.LLM}_FTFalse_{args.AD_type}.csv')
+        physical_sensation_file = os.path.join(args.data_path, f'train/physical_sensation_prediction_with_definition_{args.LLM}_FTFalse_{args.AD_type}.csv')
         physical_sensations = pd.read_csv(physical_sensation_file)
         physical_sensations = physical_sensations.set_index('ID')['description'].to_dict()
         return physical_sensations
