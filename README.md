@@ -1,8 +1,10 @@
-# CAP: Evaluation of Persuasive and Creative Image Generation
+# CAP: Evaluation of Persuasive and Creative Image Generation [\[Project Page\]](aysanaghazadeh.github.io/CAP)
 >[ICCV 2025] [Aysan Aghazadeh](aysanaghazadeh.github.io), [Adriana Kovashka](https://people.cs.pitt.edu/~kovashka/index.htm)
 
 ## Abstract
-CAP is a framework for evaluating advertisement images in terms of:
+This is the official repo for CAP: Evaluation of Persuasive and Ceative Image Generation.
+
+Please contact Aysan Aghazadeh at aya34(at)pitt(dot)edu or aysan(dot)aghazadeh(at)gmail(dot)com for any questions or more information.
   - Creativity
   - Alignment with Implicit Messages
   - Persuasiveness
