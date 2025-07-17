@@ -160,7 +160,27 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3" style="text-align:center;">Evaluation methods</h2>
+      <h2 class="title is-3" style="text-align:center;">Metrics (CAP)</h2>
+
+      
+      [cite_start]<p>To address the evaluation gap, the authors propose three novel metrics to assess generated images based on their Creativity, Alignment with the prompt, and Persuasiveness[cite: 1, 5].</p>
+    
+      <h4>Alignment of Image and Message (AIM)</h4>
+      [cite_start]<p>This metric evaluates how well a generated image aligns with an implicit message, such as an "action-reason" statement[cite: 1, 24, 28]. [cite_start]The input text often implies a message rather than explicitly describing objects[cite: 3, 24]. The process involves two steps:
+      </p>
+      <ul>
+        [cite_start]<li>A Multimodal Large Language Model (MLLM) generates a detailed description of the generated ad image[cite: 28].</li>
+        [cite_start]<li>A fine-tuned Large Language Model (LLM) uses this description to generate a new action-reason statement ($AR_{gen}$) that it interprets from the image[cite: 28].</li>
+      </ul>
+      [cite_start]<p>The final AIM score is the semantic similarity between the original input message ($AR_m$) and the newly generated statement ($AR_{gen}$)[cite: 28].</p>
+    
+      <h4>Creativity ($C_{obj}$)</h4>
+      [cite_start]<p>Creativity is defined as the image's uniqueness while still effectively conveying the intended ad message[cite: 1, 5, 30]. [cite_start]The metric is calculated as a ratio: the AIM score (for relevance) is divided by the average CLIP similarity between the generated image and the objects explicitly mentioned in the text (to measure uniqueness)[cite: 30].</p>
+    
+      <h4>Persuasiveness ($P_{comp+AIM}$)</h4>
+      [cite_start]<p>This metric evaluates an image's ability to be convincing to its intended audience[cite: 1, 32]. [cite_start]It combines scores from multiple components grounded in prior persuasion literature[cite: 1, 6, 37, 42, 45]. [cite_start]An LLM is prompted with questions to score the image's ability to appeal to a specific audience, convert features to benefits, and use rhetorical appeals (Ethos, Pathos, Logos)[cite: 6, 28, 32]. [cite_start]It also scores visual qualities like elaboration, originality, imagination, and synthesis[cite: 28]. [cite_start]The final persuasiveness score is a weighted average of these component scores and the AIM score[cite: 28].</p>
+    
+      
       <div id="results-carousel" class="carousel results-carousel" style="border:1px">
        <div class="item">
         <!-- Your image here -->
