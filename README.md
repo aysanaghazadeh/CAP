@@ -1,5 +1,5 @@
 # CAP: Evaluation of Persuasive and Creative Image Generation
-(ICCV 2025)
+>[ICCV 2025] [Aysan Aghazadeh](aysanaghazadeh.github.io), [Adriana Kovashka](https://people.cs.pitt.edu/~kovashka/index.htm)
 
 ## Abstract
 CAP is a framework for evaluating advertisement images in terms of:
