@@ -1,4 +1,4 @@
-# Paper Title: \'CAP: Evaluation of Persuasive and Creative Image Generation\'
+# \'CAP: Evaluation of Persuasive and Creative Image Generation\'
 (ICCV 2025)
 
 ## Abstract
