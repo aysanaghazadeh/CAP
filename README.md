@@ -42,4 +42,3 @@ pip install -r requirements.txt
 # OS Setup
 export HF_TOKEN='your hugging face access token'
 ```
-
