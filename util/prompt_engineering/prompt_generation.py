@@ -106,8 +106,8 @@ class PromptGenerator:
         return descriptions.loc[descriptions['ID'] == image_filename]['description'].values[0]
 
     @staticmethod
-    def get_LLM_input_prompt(args, action_reason, sentiment=None, topic=None, audience=None):
-        data = {'action_reason': action_reason, 'sentiment': sentiment, 'topic': topic, 'audience': audience}
+    def get_LLM_input_prompt(args, action_reason, sentiment=None, topic=None, audience=None, physical_sensation=None, objects=None):
+        data = {'action_reason': action_reason, 'sentiment': sentiment, 'topic': topic, 'audience': audience, 'physical_sensation': physical_sensation, 'objects': objects}
         env = Environment(loader=FileSystemLoader(args.prompt_path))
         template = env.get_template(args.llm_prompt)
         output = template.render(**data)
@@ -240,7 +240,7 @@ class PromptGenerator:
         #     if AR not in QA[image_filename][0]:
         #         action_reason.append(AR)
         #         break
-        LLM_input_prompt = self.get_LLM_input_prompt(args, action_reason, sentiment, topic, audience)
+        LLM_input_prompt = self.get_LLM_input_prompt(args, action_reason, sentiment, topic, audience, physical_sensation, objects)
         description = self.LLM_model(LLM_input_prompt)
         if 'Adjective:' in description:
             adjective = description.split('Adjective:')[1]
