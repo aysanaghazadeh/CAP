@@ -169,7 +169,7 @@ class PromptGenerator:
         objects = ''
         if args.with_objects:
             if image_filename in self.objects:
-                objects = self.objects[image_filename]
+                objects = self.objects[image_filename].split(':\n')[-1]
             else:
                 print(f'there is no object for image: {image_filename}')
         data = {'action_reason': action_reason,
@@ -226,7 +226,7 @@ class PromptGenerator:
         objects = ''
         if args.with_objects:
             if image_filename in self.objects:
-                objects = self.objects[image_filename]
+                objects = self.objects[image_filename].split(':\n')[-1]
             else:
                 print(f'there is no object for image: {image_filename}')
         QA_path = args.test_set_QA if not args.train else args.train_set_QA
@@ -250,12 +250,11 @@ class PromptGenerator:
         objects  = ''
         if args.with_objects:
             if image_filename in self.objects:
-                objects = self.objects[image_filename]
+                objects = self.objects[image_filename].split(':\n')[-1]
             else:
                 print(f'there is no object for image: {image_filename}')
         data = {'description': description,
                 'action_reason': action_reason,
-                'objects': objects,
                 'adjective': adjective,
                 'sentiment': sentiment,
                 'topic': topic,
