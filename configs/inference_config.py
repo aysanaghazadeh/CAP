@@ -79,6 +79,9 @@ def parse_args():
     parser.add_argument('--with_physical_sensation',
                         type=bool,
                         default=False)
+    parser.add_argument('--with_objects',
+                        type=bool,
+                        default=False)
     parser.add_argument('--model_path',
                         type=str,
                         default='../models',
