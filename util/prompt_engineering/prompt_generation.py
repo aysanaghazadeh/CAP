@@ -15,13 +15,14 @@ class PromptGenerator:
         self.topics = None
         self.audiences = None
         self.physical_sensation = None
+        self.objects = None
         self.set_LLM(args)
         self.set_descriptions(args)
         self.set_sentiments(args)
         self.set_topics(args)
         self.set_audience(args)
         self.set_physical_sensation(args)
-
+        self.set_objects(args)
     def set_LLM(self, args):
         if args.text_input_type == 'LLM':
             self.LLM_model = LLM(args)
@@ -46,6 +47,10 @@ class PromptGenerator:
         if args.with_physical_sensation:
             self.physical_sensation = self.get_all_physical_sensation(args)
 
+    def set_objects(self, args):
+        if args.with_objects:
+            self.objects = self.get_all_objects(args)
+    
     @staticmethod
     def get_all_sentiments(args):
         if not args.with_sentiment:
@@ -79,6 +84,15 @@ class PromptGenerator:
         physical_sensations = pd.read_csv(physical_sensation_file)
         physical_sensations = physical_sensations.set_index('ID')['description'].to_dict()
         return physical_sensations
+    
+    @staticmethod
+    def get_all_objects(args):
+        if not args.with_objects:
+            return None
+        objects_file = os.path.join(args.data_path, f'train/sensation_object_retrieval_{args.LLM}_FTFalse_{args.AD_type}.csv')
+        objects = pd.read_csv(objects_file)
+        objects = objects.set_index('ID')['description'].to_dict()
+        return objects
 
     @staticmethod
     def get_all_descriptions(args):
@@ -149,15 +163,22 @@ class PromptGenerator:
                 if len(physical_sensation.split(':')) > 1:
                     physical_sensation = physical_sensation.split(':')[-1].split('-')[-1]
                 else:
-                    audience = 'no sensation'
+                    physical_sensation = 'no sensation'
             else:
                 print(f'there is no sensation for image: {image_filename}')
+        objects = ''
+        if args.with_objects:
+            if image_filename in self.objects:
+                objects = self.objects[image_filename]
+            else:
+                print(f'there is no object for image: {image_filename}')
         data = {'action_reason': action_reason,
                 'description': self.get_description(image_filename, self.descriptions).split('Description of the image:')[-1],
                 'sentiment': sentiment,
                 'topic': topic,
                 'audience': audience,
-                'physical_sensation': physical_sensation}
+                'physical_sensation': physical_sensation,
+                'objects': objects}
         env = Environment(loader=FileSystemLoader(args.prompt_path))
         template = env.get_template(args.T2I_prompt)
         output = template.render(**data)
@@ -199,9 +220,15 @@ class PromptGenerator:
                 if len(physical_sensation.split(':')) > 1:
                     physical_sensation = physical_sensation.split(':')[-1].split('-')[-1]
                 else:
-                    audience = 'no sensation'
+                    physical_sensation = 'no sensation'
             else:
                 print(f'there is no sensation for image: {image_filename}')
+        objects = ''
+        if args.with_objects:
+            if image_filename in self.objects:
+                objects = self.objects[image_filename]
+            else:
+                print(f'there is no object for image: {image_filename}')
         QA_path = args.test_set_QA if not args.train else args.train_set_QA
         QA_path = os.path.join(args.data_path, QA_path)
         QA = json.load(open(QA_path))
@@ -215,17 +242,17 @@ class PromptGenerator:
         #         break
         LLM_input_prompt = self.get_LLM_input_prompt(args, action_reason, sentiment, topic, audience)
         description = self.LLM_model(LLM_input_prompt)
-        # description = f'{description}'
-        if 'objects:' in description:
-            objects = description.split('objects:')[1]
-            description = description.split('objects:')[0]
-        else:
-            objects = None
         if 'Adjective:' in description:
             adjective = description.split('Adjective:')[1]
             description = description.split('Adjective:')[0]
         else:
             adjective = None
+        objects  = ''
+        if args.with_objects:
+            if image_filename in self.objects:
+                objects = self.objects[image_filename]
+            else:
+                print(f'there is no object for image: {image_filename}')
         data = {'description': description,
                 'action_reason': action_reason,
                 'objects': objects,
@@ -233,7 +260,8 @@ class PromptGenerator:
                 'sentiment': sentiment,
                 'topic': topic,
                 'audience': audience,
-                'physical_sensation': physical_sensation}
+                'physical_sensation': physical_sensation,
+                'objects': objects}
 
         print('data:', data)
         env = Environment(loader=FileSystemLoader(args.prompt_path))
