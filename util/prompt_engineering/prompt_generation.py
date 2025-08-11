@@ -262,7 +262,7 @@ class PromptGenerator:
                 'physical_sensation': physical_sensation,
                 'objects': objects}
 
-        print('data:', data)
+        # print('data:', data)
         env = Environment(loader=FileSystemLoader(args.prompt_path))
         template = env.get_template(args.T2I_prompt)
         output = template.render(**data)
