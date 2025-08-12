@@ -17,8 +17,9 @@ from VLMs.InternVL2 import InternVL
 from VLMs.multi_image_InternVL import MultiInternVL
 import itertools
 from LLMs.LLM import LLM
-# from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer
 from cleanfid import fid
+
 
 
 
@@ -64,13 +65,13 @@ class Metrics:
         if args.evaluation_type in llm_needed_evaluation:
             self.llm = LLM(args)
             self.QA = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
-            # if args.evaluation_type == 'text_image_alignment':
+            if args.evaluation_type == 'text_image_alignment':
                 # self.cos = nn.CosineSimilarity(dim=1, eps=1e-6)
                 #
                 # self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
                 # self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
                 # self.model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
-                # self.model = SentenceTransformer("BAAI/bge-m3")
+                self.model = SentenceTransformer("BAAI/bge-m3")
         if args.evaluation_type == 'image_text_ranking':
             self.tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3-mini-4k-instruct",
                                                            token=os.environ.get('HF_TOKEN'),
@@ -316,36 +317,36 @@ class Metrics:
         similarity_score = 0
         similarity_scores_action = []
         similarity_scores_reason = []
-        # for action_reason in action_reasons:
-        #     print(action_reason)
-        #     action_reason = action_reason.lower()
-        #     # encoded_input = self.tokenizer([action_reason], padding=True, truncation=True,
-        #     #                                return_tensors='pt')
-        #     # with torch.no_grad():
-        #     #     model_output = self.model(**encoded_input)
-        #     # action_reason_embeddings = mean_pooling(model_output, encoded_input['attention_mask'])
-        #     #
-        #     # # Normalize embeddings
-        #     # action_reason_embeddings = nn.functional.normalize(action_reason_embeddings, p=2, dim=1)
-        #     # similarity_score += self.cos(action_reason_embeddings, generated_image_embeddings)
+        for action_reason in action_reasons:
+            print(action_reason)
+            action_reason = action_reason.lower()
+            # encoded_input = self.tokenizer([action_reason], padding=True, truncation=True,
+            #                                return_tensors='pt')
+            # with torch.no_grad():
+            #     model_output = self.model(**encoded_input)
+            # action_reason_embeddings = mean_pooling(model_output, encoded_input['attention_mask'])
+            #
+            # # Normalize embeddings
+            # action_reason_embeddings = nn.functional.normalize(action_reason_embeddings, p=2, dim=1)
+            # similarity_score += self.cos(action_reason_embeddings, generated_image_embeddings)
         #
-            # sentences = [
-            #     action_reason.split('because')[0],
-            #     generated_image_message.split('because')[0]
-            # ]
-            # embeddings = self.model.encode(sentences)
-            # similarity_score_action = self.model.similarity(embeddings, embeddings)[0][1].item()
+            sentences = [
+                action_reason.split('because')[0],
+                generated_image_message.split('because')[0]
+            ]
+            embeddings = self.model.encode(sentences)
+            similarity_score_action = self.model.similarity(embeddings, embeddings)[0][1].item()
 
-            # sentences = [
-            #     action_reason.split('because')[-1],
-            #     generated_image_message.split('because')[-1]
-            # ]
-            # embeddings = self.model.encode(sentences)
-            # similarity_score_reason = self.model.similarity(embeddings, embeddings)[0][1].item()
-            # similarity_score += (similarity_score_action + similarity_score_reason * 4) / 5
-            # print(similarity_score)
-            # similarity_scores_action.append(similarity_score_action)
-            # similarity_scores_reason.append(similarity_score_reason)
+            sentences = [
+                action_reason.split('because')[-1],
+                generated_image_message.split('because')[-1]
+            ]
+            embeddings = self.model.encode(sentences)
+            similarity_score_reason = self.model.similarity(embeddings, embeddings)[0][1].item()
+            similarity_score += (similarity_score_action + similarity_score_reason * 4) / 5
+            print(similarity_score)
+            similarity_scores_action.append(similarity_score_action)
+            similarity_scores_reason.append(similarity_score_reason)
 
         # return generated_image_message, (similarity_score.item() / len(action_reasons))
         return generated_image_message, (
