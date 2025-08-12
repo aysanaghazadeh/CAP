@@ -286,7 +286,6 @@ class Metrics:
                                                                                       min=1e-9)
 
         print(f'description: {description.split("Q2:")[-1].lower()}')
-        print(f'objects existence: {description.split("Q2:")[0].lower()}')
         if 'No' in description.split('Q2:')[0].lower():
             return 0, 0, 0, 0
         description = description.split('Q2:')[-1]
