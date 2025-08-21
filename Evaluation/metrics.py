@@ -32,8 +32,6 @@ def image_to_tensor(image_path):
 
 class Metrics:
     def __init__(self, args):
-        # self.clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device=args.device)
-        # self.clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
         self.args = args
         alignment_scores = [
             'image_text_alignment',
@@ -66,10 +64,6 @@ class Metrics:
             self.llm = LLM(args)
             self.QA = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
             if args.evaluation_type == 'text_image_alignment':
-                # self.cos = nn.CosineSimilarity(dim=1, eps=1e-6)
-                #
-                # self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
-                # self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
                 # self.model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
                 self.model = SentenceTransformer("BAAI/bge-m3")
         if args.evaluation_type == 'image_text_ranking':

@@ -195,3 +195,40 @@
 #     print('--------------------------------')
 
 
+import json 
+
+data_no_object = json.load(open('/Users/aysanaghazadeh/experiments/results/IN_InternVL_LLAMA3Instruct_descriptions_AuraFlow_20240817_185858_description_single_paragraph_full_description_persuasion_creativity_reason_only.json'))
+reason_no_object = json.load(open('/Users/aysanaghazadeh/experiments/results/IN_InternVL_LLAMA3Instruct_descriptions_AuraFlow_20240817_185858_description_single_paragraph_no_textLLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
+data_with_object = json.load(open('/Users/aysanaghazadeh/experiments/results/IN_InternVL_LLM_input_objects_LLAMA3_instruct_FTFalse_COM_AuraFlow_20250810_225032_description_single_paragraph_full_description_with_text_LLAMA3_instruct_persuasion_creativity.json'))
+reason_with_object = json.load(open('/Users/aysanaghazadeh/experiments/results/IN_InternVL_LLM_input_objects_LLAMA3_instruct_FTFalse_COM_AuraFlow_20250810_225032_description_single_paragraph_full_description_with_textLLAMA3_instruct_text_image_alignment_isFineTunedTrue_3000_weighted.json'))
+count = 0
+no_object_reason_score = 0
+with_object_reason_score = 0
+no_object_data_score = 0
+with_object_data_score = 0
+no_object_PA_score = 0
+with_object_PA_score = 0
+AIM_no_object = 0
+AIM_with_object = 0
+for image_url in data_no_object:
+    if image_url not in data_with_object or image_url not in reason_with_object or image_url not in reason_no_object:
+        continue
+    no_object_reason_score += sum(reason_no_object[image_url][-1])/len(reason_no_object[image_url][-1])
+    with_object_reason_score += sum(reason_with_object[image_url][-1])/len(reason_with_object[image_url][-1])
+    no_object_data_score += sum(data_no_object[image_url][:-1])/len(data_no_object[image_url][:-1])/5
+    with_object_data_score += sum(data_with_object[image_url][:-1])/len(data_with_object[image_url][:-1])/5
+    no_object_PA =(sum(data_no_object[image_url][:-1]) / 5 + sum(reason_no_object[image_url][-1])/len(reason_no_object[image_url][-1])) / 8
+    with_object_PA =(sum(data_with_object[image_url][:-1]) / 5 + sum(reason_with_object[image_url][-1])/len(reason_with_object[image_url][-1])) / 8
+    no_object_PA_score += no_object_PA
+    with_object_PA_score += with_object_PA
+    AIM_no_object += reason_no_object[image_url][1]
+    AIM_with_object += reason_with_object[image_url][1]
+    count += 1
+print(f'no object reason score: {no_object_reason_score/count}')
+print(f'with object reason score: {with_object_reason_score/count}')
+print(f'no object data score: {no_object_data_score/count}')
+print(f'with object data score: {with_object_data_score/count}')
+print(f'no object PA score: {no_object_PA_score/count}')
+print(f'with object PA score: {with_object_PA_score/count}')
+print(f'AIM no object: {AIM_no_object/count}')
+print(f'AIM with object: {AIM_with_object/count}')
