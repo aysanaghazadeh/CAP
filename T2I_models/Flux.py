@@ -14,7 +14,7 @@ class Flux(nn.Module):
         )
         self.pipeline = DiffusionPipeline.from_pretrained("black-forest-labs/FLUX.1-dev",
                                                            torch_dtype=torch.float16,
-                                                           device_map="auto",
+                                                           device_map="balanced",
                                                           quantization_config=quantization_config)
         # self.pipeline = self.pipeline.to(device=args.device)
 
