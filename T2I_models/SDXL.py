@@ -1,12 +1,13 @@
 import torch
 from torch import nn
 from diffusers import DiffusionPipeline
-
+import os
 
 class SDXL(nn.Module):
     def __init__(self, args):
         super(SDXL, self).__init__()
-        self.pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-0.9").to(device=args.device)
+        self.pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-0.9",
+                                                      token=os.environ.get('HF_TOKEN')).to(device=args.device)
         
 
     def forward(self, prompt):
