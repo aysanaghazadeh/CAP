@@ -298,6 +298,18 @@ class PromptGenerator:
                     audience = 'everyone'
             else:
                 print(f'there is no audience for image: {image_filename}')
+        physical_sensation = ''
+        if args.with_physical_sensation:
+            if image_filename in self.physical_sensation:
+                physical_sensation = self.physical_sensation[image_filename]
+            else:
+                print(f'there is no sensation for image: {image_filename}')
+        objects = ''
+        if args.with_objects:
+            if image_filename in self.objects:
+                objects = self.objects[image_filename].split(':\n')[-1]
+            else:
+                print(f'there is no object for image: {image_filename}')
         QA_path = args.test_set_QA if not args.train else args.train_set_QA
         QA_path = os.path.join(args.data_path, QA_path)
         QA = json.load(open(QA_path))
@@ -307,7 +319,7 @@ class PromptGenerator:
         #     if AR not in QA[image_filename][0]:
         #         action_reason.append(AR)
         #         break
-        data = {'action_reason': action_reason, 'sentiment': sentiment, 'topic': topic, 'audience': audience}
+        data = {'action_reason': action_reason, 'sentiment': sentiment, 'topic': topic, 'audience': audience, 'physical_sensation': physical_sensation, 'objects': objects}
         env = Environment(loader=FileSystemLoader(args.prompt_path))
         template = env.get_template(args.T2I_prompt)
         output = template.render(**data)
