@@ -6,7 +6,7 @@ from diffusers import DiffusionPipeline
 class SDXL(nn.Module):
     def __init__(self, args):
         super(SDXL, self).__init__()
-        self.pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base").to(device=args.device)
+        self.pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-0.9").to(device=args.device)
         
 
     def forward(self, prompt):
