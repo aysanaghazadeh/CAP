@@ -3,9 +3,9 @@ from torch import nn
 from diffusers import StableDiffusionXLPipeline, DPMSolverSinglestepScheduler, StableDiffusionPipeline
 
 
-class SDXL(nn.Module):
+class SDXLFlash(nn.Module):
     def __init__(self, args):
-        super(SDXL, self).__init__()
+        super(SDXLFlash, self).__init__()
         self.device = args.device
         if not args.train:
             self.pipe = StableDiffusionXLPipeline.from_pretrained("sd-community/sdxl-flash",

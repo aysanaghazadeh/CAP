@@ -1,6 +1,8 @@
 from torch import nn
 from T2I_models.PitxArt import PixArt
-from T2I_models.SDXLFlash import SDXL
+from T2I_models.SDXLFlash import SDXLFlash
+from T2I_models.SDXL import SDXL
+from T2I_models.SD3 import SD3
 from T2I_models.DMD2 import DMD
 from T2I_models.AuraFlow import AuraFlow
 from T2I_models.DALLE3 import DALLE3
@@ -11,7 +13,9 @@ class T2IModel(nn.Module):
         super(T2IModel, self).__init__()
         model_map = {
             'PixArt': PixArt,
+            'SDXLFlash': SDXLFlash,
             'SDXL': SDXL,
+            'SD3': SD3,
             'DMD': DMD,
             'AuraFlow': AuraFlow,
             'DALLE3': DALLE3,
