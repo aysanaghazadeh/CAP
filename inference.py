@@ -103,14 +103,15 @@ def process_action_reason(action_reasons):
 
 def generate_images(args):
     # seen_files = set(pd.read_csv('../experiments/results/LLAMA3Instruct_descriptions.csv_AuraFlow_20240817_185858.csv').image_url.values)
-    test_set = get_test_data(args)
+    test_set = get_test_data(args)['ID'].values[:290]
     AdImageGeneration = AdvertisementImageGeneration(args)
     QA = get_QA(args)
     experiment_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
-    metrics = Metrics(args)
+    # metrics = Metrics(args)
     print(f'experiment started at {experiment_datetime}')
-    test_set_image_url = list(test_set['ID'].values)
-    test_set_image_url = test_set_image_url[:1340]
+    # test_set_image_url = list(test_set['ID'].values)
+    test_set_image_url = list(test_set)
+    test_set_image_url = test_set_image_url
     if args.text_input_type == 'original_description':
         test_set_image_url = pd.read_csv(args.description_file).ID.values
     for filename, content in QA.items():
