@@ -302,6 +302,10 @@ class PromptGenerator:
         if args.with_physical_sensation:
             if image_filename in self.physical_sensation:
                 physical_sensation = self.physical_sensation[image_filename]
+                if len(physical_sensation.split(':')) > 1:
+                    physical_sensation = physical_sensation.split(':')[-1].split('-')[-1]
+                else:
+                    physical_sensation = 'no sensation'
             else:
                 print(f'there is no sensation for image: {image_filename}')
         objects = ''
