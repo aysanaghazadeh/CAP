@@ -124,7 +124,10 @@ class Evaluation:
         persuasiveness_scores = {}
         for row in descriptions.values:
             image_url = '/'.join(row[0].split('/')[-2:])
-
+            if len(row[0].split('/')) > 2:
+                sensation = row[0].split('/')[0] + '/'
+            else:
+                sensation = ''
             print(image_url)
             if image_url not in QA:
                 continue
@@ -135,7 +138,7 @@ class Evaluation:
                                                                                                image_url)
             print(f'persuasiveness scores of the image {image_url} is: \n {persuasiveness_score}')
             print('*' * 80)
-            persuasiveness_scores[image_url] = list(persuasiveness_score.values())
+            persuasiveness_scores[sensation+image_url] = list(persuasiveness_score.values())
 
             with open(saving_path, "w") as outfile:
                 json.dump(persuasiveness_scores, outfile)
