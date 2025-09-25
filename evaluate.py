@@ -129,13 +129,12 @@ class Evaluation:
             else:
                 sensation = ''
             print(image_url)
-            image_url = sensation + image_url
-            generated_image1 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
-            generated_image2 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
+            generated_image1 = descriptions.loc[descriptions['ID'] == sensation + image_url, 'description'].values[0]
+            generated_image2 = descriptions.loc[descriptions['ID'] == sensation + image_url, 'description'].values[0]
             persuasiveness_score = score_metrics.get_llm_multi_question_persuasiveness_ranking(generated_image1.split('Q2:')[-1],
                                                                                                generated_image2.split('Q2:')[-1],
                                                                                                image_url)
-            print(f'persuasiveness scores of the image {image_url} is: \n {persuasiveness_score}')
+            print(f'persuasiveness scores of the image {sensation + image_url} is: \n {persuasiveness_score}')
             print('*' * 80)
             persuasiveness_scores[sensation+image_url] = list(persuasiveness_score.values())
 
