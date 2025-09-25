@@ -123,7 +123,7 @@ class Evaluation:
         descriptions = pd.read_csv(args.description_file)[:290]
         persuasiveness_scores = {}
         for row in descriptions.values:
-            image_url = row[0]
+            image_url = '/'.join(row[0].split('/')[-2:])
 
             print(image_url)
             if image_url not in QA:
