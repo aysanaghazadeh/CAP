@@ -129,6 +129,7 @@ class Evaluation:
             else:
                 sensation = ''
             print(image_url)
+            image_url = sensation + image_url
             if image_url not in QA:
                 continue
             generated_image1 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
