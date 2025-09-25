@@ -119,11 +119,13 @@ class Evaluation:
         print(saving_path)
         print(args.result_path)
         print(args.result_file)
-
+        QA = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
         descriptions = pd.read_csv(args.description_file)[:290]
         persuasiveness_scores = {}
         for row in descriptions.values:
             image_url = row[0]
+            if image_url not in QA:
+                continue
             print(image_url)
             generated_image1 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
             generated_image2 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
