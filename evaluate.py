@@ -124,13 +124,13 @@ class Evaluation:
         persuasiveness_scores = {}
         for row in descriptions.values:
             image_url = '/'.join(row[0].split('/')[-2:])
+            print(image_url)
             if image_url not in QA:
                 continue
             if len(row[0].split('/')) > 2:
                 sensation = row[0].split('/')[0] + '/'
             else:
                 sensation = ''
-            print(image_url)
             generated_image1 = descriptions.loc[descriptions['ID'] == sensation + image_url, 'description'].values[0]
             generated_image2 = descriptions.loc[descriptions['ID'] == sensation + image_url, 'description'].values[0]
             persuasiveness_score = score_metrics.get_llm_multi_question_persuasiveness_ranking(generated_image1.split('Q2:')[-1],
