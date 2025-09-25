@@ -130,8 +130,6 @@ class Evaluation:
                 sensation = ''
             print(image_url)
             image_url = sensation + image_url
-            if image_url not in QA:
-                continue
             generated_image1 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
             generated_image2 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
             persuasiveness_score = score_metrics.get_llm_multi_question_persuasiveness_ranking(generated_image1.split('Q2:')[-1],
