@@ -182,20 +182,27 @@ class Evaluation:
         results = pd.read_csv(os.path.join(args.result_path, args.result_file)).values
         alignment_scores = {}
         for row in results:
-            image_url = row[0]
+            image_url = '/'.join(row[0].split('/')[-2:])
+            if len(row[0].split('/')) > 2:
+                sensation = row[0].split('/')[0] + '/'
+            else:
+                sensation = ''
+
             print(image_url)
-            action_reasons = action_reasons_all[image_url][0]
-            if image_url not in descriptions.ID.values:
+            if image_url not in action_reasons_all:
                 continue
-            description = descriptions.loc[descriptions['ID'] == image_url]['description'].values[0]
+            action_reasons = action_reasons_all[image_url][0]
+            if sensation + image_url not in descriptions.ID.values:
+                continue
+            description = descriptions.loc[descriptions['ID'] == sensation + image_url]['description'].values[0]
             generated_image_message, alignment_score, action_scores, reason_scores = alignment_score_model.get_text_image_alignment_score(action_reasons,
                                                                                      description,
                                                                                      args)
             print(f'action scores are: {action_scores}')
             print(f'reason scores are: {reason_scores}')
-            print(f'text image alignment score of the image {image_url} is {alignment_score} out of 1')
+            print(f'text image alignment score of the image {sensation + image_url} is {alignment_score} out of 1')
             print('*' * 80)
-            alignment_scores[image_url] = [generated_image_message, alignment_score, action_scores, reason_scores]
+            alignment_scores[sensation + image_url] = [generated_image_message, alignment_score, action_scores, reason_scores]
 
             # print(f'average persuasiveness is {sum(persuasiveness_scores) / len(persuasiveness_scores)}')
             with open(saving_path, "w") as outfile:
