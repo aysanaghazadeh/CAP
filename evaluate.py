@@ -124,9 +124,10 @@ class Evaluation:
         persuasiveness_scores = {}
         for row in descriptions.values:
             image_url = row[0]
+
+            print(image_url)
             if image_url not in QA:
                 continue
-            print(image_url)
             generated_image1 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
             generated_image2 = descriptions.loc[descriptions['ID'] == image_url, 'description'].values[0]
             persuasiveness_score = score_metrics.get_llm_multi_question_persuasiveness_ranking(generated_image1.split('Q2:')[-1],
