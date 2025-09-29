@@ -1,5 +1,5 @@
 # CAP🧢: Evaluation of Persuasive and Creative Image Generation [\[Project Page\]](https://aysanaghazadeh.github.io/CAP)
->[ICCV 2025] [Aysan Aghazadeh](aysanaghazadeh.github.io), [Adriana Kovashka](https://people.cs.pitt.edu/~kovashka/index.htm)
+>[ICCV 2025] [Aysan Aghazadeh](https://aysanaghazadeh.github.io), [Adriana Kovashka](https://people.cs.pitt.edu/~kovashka/index.htm)
 
 ## Abstract
 This is the official repo for CAP: Evaluation of Persuasive and Ceative Image Generation.
