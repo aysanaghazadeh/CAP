@@ -149,25 +149,24 @@
       <p><b>Creativity (C<sub>obj</sub>)</b></p>
       <p>Creativity is defined as the image's uniqueness while still effectively conveying the intended ad message. The metric is calculated as a ratio: the AIM score (for relevance) is divided by the average CLIP similarity between the generated image and the objects explicitly mentioned in the text (to measure uniqueness).</p>
       <br>
-      <p><b>Alignment (AIM)</b></p>
+      <p><b>Alignment of Image and Message(AIM)</b></p>
       <p>This metric is deisnged to evaluate the semantic and visual alignment between the message and the image, capturing both semantic and visual mismatch unlike other evaluation metrics focused on only visual mismtach.</p>
-      <br>
-      <p><b>Persuasiveness (P<sub>comp+AIM</sub>)</b></p>
-      <p>This metric evaluates an image's ability to be convincing to its intended audience. It combines scores from multiple components grounded in prior persuasion literature. An LLM is prompted with questions to score the image's ability to appeal to a specific audience, convert features to benefits, and use rhetorical appeals (Ethos, Pathos, Logos). It also scores visual qualities like elaboration, originality, imagination, and synthesis. The final persuasiveness score is a weighted average of these component scores and the AIM score.</p>
-      
-      
-      <div id="results-carousel" class="carousel results-carousel" style="border:1px">
-       <div class="item">
-         <div>
-          <h4>Alignment of Image and Message (AIM)</h4>
-          <p>This metric evaluates how well a generated image aligns with an implicit message, such as an "action-reason" statement. The input text often implies a message rather than explicitly describing objects. The process involves two steps:
-          </p>
+      <div>
+          <p>The process involves two steps:</p>
           <ul>
             <li>A Multimodal Large Language Model (MLLM) generates a detailed description of the generated ad image.</li>
             <li>A fine-tuned Large Language Model (LLM) uses this description to generate a new action-reason statement (AR<sub>gen</sub>) that it interprets from the image.</li>
           </ul>
           <p>The final AIM score is the semantic similarity between the original input message (AR<sub>m</sub>) and the newly generated statement (AR<sub>gen</sub>).</p>
-         </div>
+      </div>
+      <br>
+      <p><b>Persuasiveness (P<sub>comp+AIM</sub>)</b></p>
+      <p>This metric evaluates an image's ability to be convincing to its intended audience. It combines scores from multiple components grounded in prior persuasion literature. An LLM is prompted with questions to score the image's ability to appeal to a specific audience, convert features to benefits, and use rhetorical appeals (Ethos, Pathos, Logos). It also scores visual qualities like elaboration, originality, imagination, and synthesis. The final persuasiveness score is a weighted average of these component scores and the AIM score.</p>
+      
+      
+      <div style="border:1px">
+       <div >
+         
         <img src="static/images/AIM.png" alt="MY ALT TEXT"/>
          <hr>
         <h2 class="subtitle has-text-centered">
@@ -194,14 +193,6 @@
 </div>
 </section>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video> -->
 
 <section class="hero is-small">
   <div class="hero-body">
@@ -244,23 +235,23 @@
 
 
 <!-- Youtube video -->
-<!-- <section class="hero is-small is-light">
+<section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container"> -->
       <!-- Paper video. -->
-<!--       <h2 class="title is-3">Video Presentation</h2>
+      <h2 class="title is-3">Video Presentation</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           
-          <div class="publication-video"> -->
+          <div class="publication-video">
             <!-- Youtube embed code here -->
-<!--             <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section> -->
+</section>
 <!-- End youtube video -->
 
 
