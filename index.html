@@ -121,23 +121,6 @@
 </section>
 
 
-<!-- Teaser video-->
-<!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%"> -->
-        <!-- Your video here -->
-<!--         <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video> -->
-<!--       <h2 class="subtitle has-text-centered">
-        
-      </h2> -->
-<!--     </div>
-  </div>
-</section> -->
-<!-- End teaser video -->
-
 <!-- Paper abstract -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
@@ -166,12 +149,15 @@
       <p>To address the evaluation gap, the authors propose three novel metrics to assess generated images based on their Creativity, Alignment with the prompt, and Persuasiveness.</p>
     
      
-      <h3>Creativity (C<sub>obj</sub>)</h3>
+      <p><b>Creativity (C<sub>obj</sub>)</b></p>
       <p>Creativity is defined as the image's uniqueness while still effectively conveying the intended ad message. The metric is calculated as a ratio: the AIM score (for relevance) is divided by the average CLIP similarity between the generated image and the objects explicitly mentioned in the text (to measure uniqueness).</p>
-      
-      <h4>Persuasiveness (P<sub>comp+AIM</sub>)</h4>
+      <br>
+      <p><b>Alignment (AIM)</b></p>
+      <p>This metric is deisnged to evaluate the semantic and visual alignment between the message and the image, capturing both semantic and visual mismatch unlike other evaluation metrics focused on only visual mismtach.</p>
+      <br>
+      <p><b>Persuasiveness (P<sub>comp+AIM</sub>)</b></p>
       <p>This metric evaluates an image's ability to be convincing to its intended audience. It combines scores from multiple components grounded in prior persuasion literature. An LLM is prompted with questions to score the image's ability to appeal to a specific audience, convert features to benefits, and use rhetorical appeals (Ethos, Pathos, Logos). It also scores visual qualities like elaboration, originality, imagination, and synthesis. The final persuasiveness score is a weighted average of these component scores and the AIM score.</p>
-    
+      
       
       <div id="results-carousel" class="carousel results-carousel" style="border:1px">
        <div class="item">
