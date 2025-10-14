@@ -158,16 +158,15 @@
       
       <div id="results-carousel" class="carousel results-carousel" style="border:1px">
        <div class="item">
-        <!-- Your image here -->
          <div>
           <h4>Alignment of Image and Message (AIM)</h4>
           <p>This metric evaluates how well a generated image aligns with an implicit message, such as an "action-reason" statement. The input text often implies a message rather than explicitly describing objects. The process involves two steps:
           </p>
           <ul>
             <li>A Multimodal Large Language Model (MLLM) generates a detailed description of the generated ad image.</li>
-            <li>A fine-tuned Large Language Model (LLM) uses this description to generate a new action-reason statement ($AR_{gen}$) that it interprets from the image.</li>
+            <li>A fine-tuned Large Language Model (LLM) uses this description to generate a new action-reason statement (AR<sub>gen</sub>) that it interprets from the image.</li>
           </ul>
-          <p>The final AIM score is the semantic similarity between the original input message ($AR_m$) and the newly generated statement ($AR_{gen}$).</p>
+          <p>The final AIM score is the semantic similarity between the original input message (AR<sub>m</sub>) and the newly generated statement (AR<sub>gen</sub>).</p>
          </div>
         <img src="static/images/AIM.png" alt="MY ALT TEXT"/>
          <hr>
@@ -176,7 +175,6 @@
         </h2>
       </div>
       <div class="item">
-        <!-- Your image here -->
         <img src="static/images/PA.png" alt="MY ALT TEXT"/>
         <hr>
         <h2 class="subtitle has-text-centered">
@@ -195,10 +193,8 @@
 </div>
 </div>
 </section>
-<!-- End image carousel -->
 
-<!-- Teaser video-->
-<!-- <section class="hero teaser">
+<section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <video poster="" id="tree" autoplay controls muted loop height="100%">
@@ -206,14 +202,7 @@
         <source src="static/videos/banner_video.mp4"
         type="video/mp4">
       </video> -->
-<!--       <h2 class="subtitle has-text-centered">
-        
-      </h2> -->
-<!--     </div>
-  </div>
-</section> -->
-<!-- End teaser video -->
-<!-- Image carousel -->
+
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
