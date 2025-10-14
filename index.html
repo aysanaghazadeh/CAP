@@ -166,9 +166,9 @@
       <p>To address the evaluation gap, the authors propose three novel metrics to assess generated images based on their Creativity, Alignment with the prompt, and Persuasiveness.</p>
     
      
-      <h4>Creativity (C<sub>obj</sub>)</h4>
+      <h3>Creativity (C<sub>obj</sub>)</h3>
       <p>Creativity is defined as the image's uniqueness while still effectively conveying the intended ad message. The metric is calculated as a ratio: the AIM score (for relevance) is divided by the average CLIP similarity between the generated image and the objects explicitly mentioned in the text (to measure uniqueness).</p>
-    
+      
       <h4>Persuasiveness (P<sub>comp+AIM</sub>)</h4>
       <p>This metric evaluates an image's ability to be convincing to its intended audience. It combines scores from multiple components grounded in prior persuasion literature. An LLM is prompted with questions to score the image's ability to appeal to a specific audience, convert features to benefits, and use rhetorical appeals (Ethos, Pathos, Logos). It also scores visual qualities like elaboration, originality, imagination, and synthesis. The final persuasiveness score is a weighted average of these component scores and the AIM score.</p>
     
