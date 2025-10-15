@@ -144,10 +144,18 @@
 
       
       <p>To address the evaluation gap, the authors propose three novel metrics to assess generated images based on their Creativity, Alignment with the prompt, and Persuasiveness.</p>
-    
-     
+      <br>
       <p><b>Creativity (C<sub>obj</sub>)</b></p>
       <p>Creativity is defined as the image's uniqueness while still effectively conveying the intended ad message. The metric is calculated as a ratio: the AIM score (for relevance) is divided by the average CLIP similarity between the generated image and the objects explicitly mentioned in the text (to measure uniqueness).</p>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/creativity.png" alt="MY ALT TEXT"/>
+        <hr>
+        <h2 class="subtitle has-text-centered">
+          Process of computing C<sub>obj</sub>
+        </h2>
+      </div>
+      
       <br>
       <p><b>Alignment of Image and Message(AIM)</b></p>
       <p>This metric is deisnged to evaluate the semantic and visual alignment between the message and the image, capturing both semantic and visual mismatch unlike other evaluation metrics focused on only visual mismtach.</p>
@@ -159,13 +167,7 @@
           </ul>
           <p>The final AIM score is the semantic similarity between the original input message (AR<sub>m</sub>) and the newly generated statement (AR<sub>gen</sub>).</p>
       </div>
-      <br>
-      <p><b>Persuasiveness (P<sub>comp+AIM</sub>)</b></p>
-      <p>This metric evaluates an image's ability to be convincing to its intended audience. It combines scores from multiple components grounded in prior persuasion literature. An LLM is prompted with questions to score the image's ability to appeal to a specific audience, convert features to benefits, and use rhetorical appeals (Ethos, Pathos, Logos). It also scores visual qualities like elaboration, originality, imagination, and synthesis. The final persuasiveness score is a weighted average of these component scores and the AIM score.</p>
-      
-      
-      <div style="border:1px">
-       <div >
+      <div >
          
         <img src="static/images/AIM.png" alt="MY ALT TEXT"/>
          <hr>
@@ -173,6 +175,10 @@
           Overview of AIM. Orange denotes training, while blue is inference. AR<sub>w</sub> and AR<sub>l</sub> are used in training as the preferred and dis-preferred statements. AR<sub>m</sub> is the prompt for the T2I model.
         </h2>
       </div>
+      
+      <br>
+      <p><b>Persuasiveness (P<sub>comp+AIM</sub>)</b></p>
+      <p>This metric evaluates an image's ability to be convincing to its intended audience. It combines scores from multiple components grounded in prior persuasion literature. An LLM is prompted with questions to score the image's ability to appeal to a specific audience, convert features to benefits, and use rhetorical appeals (Ethos, Pathos, Logos). It also scores visual qualities like elaboration, originality, imagination, and synthesis. The final persuasiveness score is a weighted average of these component scores and the AIM score.</p>
       <div class="item">
         <img src="static/images/PA.png" alt="MY ALT TEXT"/>
         <hr>
@@ -180,17 +186,10 @@
           Process of computing P<sub>comp+AIM</sub> persuasiveness score
         </h2>
       </div>
-     <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/creativity.png" alt="MY ALT TEXT"/>
-        <hr>
-        <h2 class="subtitle has-text-centered">
-          Process of computing C<sub>obj</sub>
-        </h2>
-      </div>
+     
   </div>
 </div>
-</div>
+
 </section>
 
 
@@ -245,7 +244,7 @@
           
           <div class="publication-video">
             <!-- Youtube embed code here -->
-          <iframe src="https://youtu.be/Mcx2RIjDzh4?si=fiXnKV1oOsvDJswz" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/watch?v=Mcx2RIjDzh4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
