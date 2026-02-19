@@ -128,11 +128,15 @@ class Evaluation:
         print(args.result_file)
         QA = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
         descriptions = pd.read_csv(args.description_file)
-        persuasiveness_scores = {}
+        if os.path.exists(saving_path) and args.resume:
+            persuasiveness_scores = json.load(open(saving_path))
+            print(f'{len(persuasiveness_scores)} images have been processed before and will be skipped.')
+        else:
+            persuasiveness_scores = {}
         for row in descriptions.values:
             image_url = '/'.join(row[0].split('/')[-2:])
             print(image_url)
-            if image_url not in QA:
+            if image_url not in QA or image_url in persuasiveness_scores:
                 continue
             if len(row[0].split('/')) > 2:
                 sensation = row[0].split('/')[0] + '/'
