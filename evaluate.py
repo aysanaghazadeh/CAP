@@ -1,4 +1,5 @@
 import os.path
+import os
 import pandas as pd
 from collections import Counter
 # import t2v_metrics
@@ -68,9 +69,15 @@ class Evaluation:
         print(args.result_file)
         results = pd.read_csv(os.path.join(args.result_path, args.result_file)).values
         print(results)
-        persuasiveness_scores = {}
+        if os.path.exists(saving_path) and args.resume:
+            persuasiveness_scores = json.load(open(saving_path))
+            print(f'{len(persuasiveness_scores)} images have been processed before and will be skipped.')
+        else:
+            persuasiveness_scores = {}
         for row in results:
             image_url = row[0]
+            if image_url in persuasiveness_scores:
+                continue
             print(image_url)
             generated_image_path = row[3]
             persuasiveness_score = score_metricts.get_multi_question_persuasiveness(generated_image_path)
@@ -182,7 +189,10 @@ class Evaluation:
         action_reasons_all = json.load(open(os.path.join(args.data_path, args.test_set_QA)))
         descriptions = pd.read_csv(args.description_file)
         results = pd.read_csv(os.path.join(args.result_path, args.result_file)).values
-        alignment_scores = {}
+        if os.path.exists(saving_path) and args.resume:
+            alignment_scores = json.load(open(saving_path))
+        else:
+            alignment_scores = {}
         for row in results:
             image_url = '/'.join(row[0].split('/')[-2:])
             if len(row[0].split('/')) > 2:
