@@ -75,6 +75,9 @@ def parse_args():
                         type=str,
                         default=None,
                         help='the file path relative to the result_path')
+    parser.add_argument('--resume',
+                        type=bool,
+                        default=True)
     parser.add_argument('--text_input_type',
                         type=str,
                         default='LLM')
