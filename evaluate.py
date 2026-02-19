@@ -136,12 +136,14 @@ class Evaluation:
         for row in descriptions.values:
             image_url = '/'.join(row[0].split('/')[-2:])
             print(image_url)
-            if image_url not in QA or image_url in persuasiveness_scores:
+            if image_url not in QA:
                 continue
             if len(row[0].split('/')) > 2:
                 sensation = row[0].split('/')[0] + '/'
             else:
                 sensation = ''
+            if sensation+image_url in persuasiveness_scores:
+                continue
             generated_image1 = descriptions.loc[descriptions['ID'] == sensation + image_url, 'description'].values[0]
             generated_image2 = descriptions.loc[descriptions['ID'] == sensation + image_url, 'description'].values[0]
             persuasiveness_score = score_metrics.get_llm_multi_question_persuasiveness_ranking(generated_image1.split('Q2:')[-1],
@@ -152,6 +154,8 @@ class Evaluation:
             persuasiveness_scores[sensation+image_url] = list(persuasiveness_score.values())
 
             with open(saving_path, "w") as outfile:
+                print(f'persuasiveness scores of the image {sensation + image_url} is: \n {persuasiveness_score}')
+                print('*' * 80)
                 json.dump(persuasiveness_scores, outfile)
 
     @staticmethod
