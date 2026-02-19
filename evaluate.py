@@ -149,13 +149,14 @@ class Evaluation:
             persuasiveness_score = score_metrics.get_llm_multi_question_persuasiveness_ranking(generated_image1.split('Q2:')[-1],
                                                                                                generated_image2.split('Q2:')[-1],
                                                                                                image_url)
-            print(f'persuasiveness scores of the image {sensation + image_url} is: \n {persuasiveness_score}')
-            print('*' * 80)
+            # print(f'persuasiveness scores of the image {sensation + image_url} is: \n {persuasiveness_score}')
+            # print('*' * 80)
             persuasiveness_scores[sensation+image_url] = list(persuasiveness_score.values())
 
             with open(saving_path, "w") as outfile:
                 print(f'persuasiveness scores of the image {sensation + image_url} is: \n {persuasiveness_score}')
                 print('*' * 80)
+                print(f'image number {len(persuasiveness_scores)} is processed')
                 json.dump(persuasiveness_scores, outfile)
 
     @staticmethod
